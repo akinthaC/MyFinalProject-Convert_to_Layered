@@ -3,7 +3,7 @@ package lk.ijse.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CrudDao<T> {
+public interface CrudDao<T>  extends SuperDao{
     public  boolean save(T DTO) throws SQLException, ClassNotFoundException;
 
     public  boolean update(T DTO) throws SQLException, ClassNotFoundException;

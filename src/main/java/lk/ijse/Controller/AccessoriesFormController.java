@@ -17,6 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.AccessoriesBo;
+import lk.ijse.BO.custom.impl.AccessoriesBoImpl;
+import lk.ijse.BO.custom.impl.CustomerBoImpl;
 import lk.ijse.dao.custom.AccessoriesDao;
 import lk.ijse.dao.custom.impl.AccessoriesDaoImpl;
 import lk.ijse.dto.AccessoriesDTO;
@@ -107,6 +111,7 @@ public class AccessoriesFormController {
 
     @FXML
     private TextField txtWholeSalePrice;
+    AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
 
     public void initialize() throws IOException {
         setDate();
@@ -118,15 +123,11 @@ public class AccessoriesFormController {
 
     }
 
-    AccessoriesDao accessoriesDao = new AccessoriesDaoImpl();
-
-
-
     private void getSupplierIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = SupplierRepo.getIds();
+            List<String> idList = accessoriesBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -134,19 +135,19 @@ public class AccessoriesFormController {
 
             cmbSupplier.setItems(obList);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void getCurrentAccId() {
         try {
-            String currentId = AccessoriesRepo.getCurrentId();
+            String currentId = accessoriesBo.getCurrentId();
 
             String nextAccId = generateNextAccId(currentId);
             txtAccessorieId.setText(nextAccId);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -170,7 +171,7 @@ public class AccessoriesFormController {
         ObservableList<SupAccTm> obList2 = FXCollections.observableArrayList();
 
         try {
-            List<AccessoriesDTO> accessoriesList = AccessoriesRepo.getAll();
+            List<AccessoriesDTO> accessoriesList = accessoriesBo.getAll();
             for (AccessoriesDTO accessories : accessoriesList) {
                 tblAccessories.getItems().add( new AccessoriesTm(
                         accessories.getId(),
@@ -200,7 +201,7 @@ public class AccessoriesFormController {
             tblAccSup.setItems(obList2);
 
             tblAccessories.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 

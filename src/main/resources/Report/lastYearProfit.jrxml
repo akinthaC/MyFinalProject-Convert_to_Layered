@@ -77,7 +77,7 @@ FROM
 			</staticText>
 			<image>
 				<reportElement x="122" y="0" width="44" height="70" uuid="1fe444f9-7f0b-4e2d-a1c1-3e2e910621c0"/>
-				<imageExpression><![CDATA["/home/akintha/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="173" y="56" width="218" height="20" uuid="6d59000d-7ecb-4864-8368-d48d137c650d"/>
