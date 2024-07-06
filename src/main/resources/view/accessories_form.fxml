@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane opacity="0.94" prefHeight="733.0" prefWidth="918.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.AccessoriesFormController">
+   <children>
+      <TextField fx:id="txtAccessorieId" layoutX="44.0" layoutY="81.0" onAction="#txtSearchOnAction" onKeyReleased="#txtIdOnKeyReleased" prefHeight="30.0" prefWidth="317.0" promptText="Accessories Id" />
+      <Label layoutX="29.0" layoutY="63.0" prefHeight="16.0" prefWidth="94.0" text="Id:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="334.0" layoutY="359.0" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #27ae60;" text="Save">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="24.0">
+               <image>
+                  <Image url="@../image/icons8-save-32.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <TextField fx:id="txtAccessoriesName" layoutX="479.0" layoutY="78.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="30.0" prefWidth="317.0" promptText="Accessorie Name" />
+      <Label layoutX="459.0" layoutY="58.0" prefHeight="16.0" prefWidth="94.0" text="Name:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtQtyOnHand" layoutX="44.0" layoutY="146.0" onKeyReleased="#txtIQtyOnKeyReleased" prefHeight="30.0" prefWidth="317.0" promptText="QTY OnHand" />
+      <Label layoutX="29.0" layoutY="128.0" prefHeight="18.0" prefWidth="112.0" text="Qty OnHand:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNormalPrice" layoutX="479.0" layoutY="146.0" onKeyReleased="#txtNormalPriceOnKeyReleased" prefHeight="30.0" prefWidth="317.0" promptText="Normal Price" />
+      <Label layoutX="459.0" layoutY="124.0" prefHeight="18.0" prefWidth="112.0" text="Normal price:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtWholeSalePrice" layoutX="47.0" layoutY="220.0" onKeyReleased="#txtIdWholeSalePriceKeyReleased" prefHeight="30.0" prefWidth="317.0" promptText="WholeSale Price" />
+      <Label layoutX="29.0" layoutY="199.0" prefHeight="18.0" prefWidth="120.0" text="Wholesale Price:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnClear" buttonType="RAISED" layoutX="710.0" layoutY="359.0" onAction="#btnClearOnAction" prefHeight="20.0" prefWidth="94.0" style="-fx-background-color: #3498db;" text="Clear">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="21.0">
+               <image>
+                  <Image url="@../image/icons8-clear-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="454.0" layoutY="359.0" onAction="#btnUpdateOnAction" prefHeight="28.0" prefWidth="102.0" style="-fx-background-color: #7f8c8d;" text="Update">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="21.0">
+               <image>
+                  <Image url="@../image/icons8-update-64.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="588.0" layoutY="359.0" onAction="#btnDeleteOnAction" prefHeight="20.0" prefWidth="94.0" style="-fx-background-color: #e74c3c;" text="Delete">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="19.0" fitWidth="16.0">
+               <image>
+                  <Image url="@../image/icons8-delete-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <TableView fx:id="tblAccessories" layoutX="15.0" layoutY="419.0" prefHeight="268.0" prefWidth="642.0">
+         <columns>
+            <TableColumn fx:id="colAccessoriesId" prefWidth="137.0" text="Accessories Id" />
+            <TableColumn fx:id="colAccessoriesName" prefWidth="140.0" text="Accessories Name" />
+            <TableColumn fx:id="colQtyOnHand" prefWidth="116.0" text="Qty OnHand" />
+            <TableColumn fx:id="colNoramalPrice" prefWidth="112.0" text="Normal Price" />
+            <TableColumn fx:id="colWholeSalePrice" prefWidth="136.0" text="WholeSale Price" />
+         </columns>
+      </TableView>
+      <AnchorPane prefHeight="46.0" prefWidth="928.0" style="-fx-background-color: #1e272e;">
+         <children>
+            <Label fx:id="lblTime" layoutX="815.0" layoutY="22.0" text="4.50" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="771.0" layoutY="22.0" prefHeight="18.0" prefWidth="46.0" text="Time:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblDate" layoutX="814.0" layoutY="3.0" text="2024/04/07" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="770.0" layoutY="3.0" prefHeight="18.0" prefWidth="46.0" text="Date:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="-11.0" prefHeight="68.0" prefWidth="251.0" text="Accessories  FORM" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Line endX="264.7625732421875" endY="-1.0" layoutX="661.0" layoutY="47.0" startX="-661.0" startY="-1.0" stroke="#d71111" strokeWidth="1.75" />
+      <Label layoutX="458.0" layoutY="204.0" prefHeight="16.0" prefWidth="94.0" text="Supliier NIC:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbSupplier" layoutX="467.0" layoutY="223.0" onAction="#cmbSupplierOnAction" onKeyReleased="#filterSupplierDe" prefHeight="24.0" prefWidth="148.0" />
+      <Label layoutX="620.0" layoutY="204.0" prefHeight="18.0" prefWidth="112.0" text="Supliier Name:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSupName" layoutX="634.0" layoutY="225.0" prefHeight="24.0" prefWidth="102.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <TableView fx:id="tblAccSup" layoutX="680.0" layoutY="419.0" prefHeight="268.0" prefWidth="227.0">
+         <columns>
+            <TableColumn fx:id="colSupId" prefWidth="75.0" text="SupId" />
+            <TableColumn fx:id="colFishId2" prefWidth="75.0" text="FishId" />
+            <TableColumn fx:id="colQty" prefWidth="75.0" text="Qty" />
+         </columns>
+      </TableView>
+      <AnchorPane layoutX="716.0" layoutY="272.0" opacity="0.81" prefHeight="40.0" prefWidth="196.0" style="-fx-background-color: #ffeaa7;">
+         <children>
+            <Label layoutX="1.0" layoutY="26.0" prefHeight="18.0" prefWidth="195.0" text="(Click Here to add new qty)">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnAdd" layoutX="59.0" layoutY="2.0" onAction="#btnAddOnAction" prefHeight="24.0" prefWidth="81.0" style="-fx-background-color: #00b894;" text="Add" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="purchasedAmount" layoutX="764.0" layoutY="225.0" onKeyReleased="#txtPurchaseAmountOnKeyReleased" prefHeight="28.0" prefWidth="127.0" promptText="Amount" />
+      <Label layoutX="750.0" layoutY="203.0" prefHeight="18.0" prefWidth="156.0" text="purchase Amount :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

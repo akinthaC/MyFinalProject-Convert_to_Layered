@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="748.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.mainFormController">
+   <children>
+      <ImageView fitHeight="748.0" fitWidth="1173.0" opacity="0.45">
+         <image>
+            <Image url="@../image/Blue-colour-betta-fish_Jeravano_shutterstock.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="5.0" layoutY="6.0" opacity="0.89" prefHeight="733.0" prefWidth="224.0" style="-fx-background-color: #487eb0; -fx-background-radius: 10 10 10 10;">
+         <children>
+            <JFXButton fx:id="btnDashboard" buttonType="RAISED" cache="true" layoutX="8.0" layoutY="102.0" onAction="#btnDashboardOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Dashboard">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnCustomer" buttonType="RAISED" cache="true" layoutX="9.0" layoutY="167.0" onAction="#btnCustomerOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Customer">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnFish" buttonType="RAISED" cache="true" layoutX="9.0" layoutY="232.0" onAction="#btnFishOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="FIsh">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnAccessories" buttonType="RAISED" cache="true" layoutX="9.0" layoutY="297.0" onAction="#btnAccessoriesOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Accessories">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnOrders" buttonType="RAISED" cache="true" layoutX="9.0" layoutY="359.0" onAction="#btnOrdersOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Orders">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnEmployee" buttonType="RAISED" cache="true" layoutX="9.0" layoutY="425.0" onAction="#btnEmployeeOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Employee">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnSupplier" buttonType="RAISED" cache="true" layoutX="9.0" layoutY="489.0" onAction="#btnSupplierOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Supplier">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnPayment" buttonType="RAISED" cache="true" layoutX="8.0" layoutY="551.0" onAction="#btnPaymentOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Payment">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnReport" buttonType="RAISED" cache="true" layoutX="8.0" layoutY="616.0" onAction="#btnReportOnAction" prefHeight="47.0" prefWidth="207.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10;" text="Report">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnLogOut" buttonType="RAISED" layoutX="46.0" layoutY="686.0" onAction="#btnLogOutOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #e74c3c;" text="Log Out">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../image/icons8-log-out-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Label fx:id="lblName" alignment="CENTER" layoutX="14.0" layoutY="41.0" prefHeight="20.0" prefWidth="197.0" text="Hi. ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblGmail" alignment="CENTER" layoutX="5.0" layoutY="57.0" prefHeight="31.0" prefWidth="213.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="47.0" fitWidth="57.0" layoutX="81.0">
+               <image>
+                  <Image url="@../image/icons8-avatar-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="38.0" layoutX="17.0" layoutY="102.0">
+               <image>
+                  <Image url="@../image/icons8-dashboard-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="32.0" layoutX="24.0" layoutY="494.0">
+               <image>
+                  <Image url="@../image/icons8-supplier-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="32.0" layoutX="23.0" layoutY="554.0">
+               <image>
+                  <Image url="@../image/icons8-payment-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="38.0" layoutX="20.0" layoutY="360.0">
+               <image>
+                  <Image url="@../image/icons8-box-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="21.0" layoutY="430.0">
+               <image>
+                  <Image url="@../image/icons8-employee-80.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="17.0" layoutY="236.0">
+               <image>
+                  <Image url="@../image/icons8-fish-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="16.0" layoutY="301.0">
+               <image>
+                  <Image url="@../image/icons8-accessories-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="19.0" layoutY="173.0">
+               <image>
+                  <Image url="@../image/icons8-customer-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="32.0" layoutX="23.0" layoutY="619.0">
+               <image>
+                  <Image url="@../image/icons8-report-50.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mainPane" layoutX="238.0" layoutY="8.0" opacity="0.87" prefHeight="733.0" prefWidth="928.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;">
+         <children>
+            <Label fx:id="lblWelcome" layoutX="202.0" layoutY="28.0" prefHeight="157.0" prefWidth="508.0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblWelcome1" layoutX="190.0" layoutY="113.0" prefHeight="68.0" prefWidth="671.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
