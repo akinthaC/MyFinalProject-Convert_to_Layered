@@ -12,10 +12,9 @@ import java.sql.Date;
 @AllArgsConstructor
 @Data
 @ToString
-public class OrderDTO extends cartTm {
+public class OrderDTO {
     private String id;
     private Date date ;
     private Date handOverDate;
-    private int Qty;
     private String CusId;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class FishOrderDaoImpl implements FishOrderDao {
     public  boolean save(String ordId, String fishId, String status, int qty, String description, Date date) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeSQL("INSERT INTO fish_order VALUES(?,?,?,?,?,?)",ordId,fishId,qty,description,date);
+        return SQLUtil.executeSQL("INSERT INTO fish_order VALUES(?,?,?,?,?,?)",ordId,fishId,qty,description,status,date);
 
     }
 

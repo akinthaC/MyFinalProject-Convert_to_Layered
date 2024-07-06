@@ -3,6 +3,7 @@ package lk.ijse.dao.custom.impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.ijse.Db.DbConnection;
+import lk.ijse.Entity.Customer;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.CustomerDao;
 import lk.ijse.dto.CustomerDTO;
@@ -15,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
-    public  boolean save(CustomerDTO customer) throws SQLException, ClassNotFoundException {
+    public  boolean save(Customer customer) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("INSERT INTO customer VALUES(?,?,?,?,?,?)", customer.getId(),customer.getName(),customer.getAddress(),customer.getContact(),customer.getNIC(),customer.getType());
 
     }
 
-    public  boolean update(CustomerDTO customer) throws SQLException, ClassNotFoundException {
+    public  boolean update(Customer customer) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("UPDATE customer SET cusName = ? , contact = ?, NIC = ?, address = ?, type = ? WHERE cusId = ? ", customer.getName(),customer.getAddress(),customer.getContact(),customer.getNIC(),customer.getType(),customer.getId());
     }
 
-    public  CustomerDTO searchById(String id) throws SQLException, ClassNotFoundException {
+    public Customer searchById(String id) throws SQLException, ClassNotFoundException {
 
 
         ResultSet resultSet = SQLUtil.executeSQL("SELECT * FROM customer WHERE cusId = ?",id);
@@ -39,7 +40,7 @@ public class CustomerDaoImpl implements CustomerDao {
             String address = resultSet.getString(4);
             String type = resultSet.getString(6);
 
-            CustomerDTO customer = new CustomerDTO(cusId,name,contact,NIC,address,type);
+            Customer customer = new Customer(cusId,name,contact,NIC,address,type);
             return customer;
 
         }
@@ -51,11 +52,11 @@ public class CustomerDaoImpl implements CustomerDao {
         return SQLUtil.executeSQL("DELETE FROM customer WHERE cusId = ?", id);
     }
 
-    public  List<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
+    public  List<Customer> getAll() throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = SQLUtil.executeSQL("SELECT * FROM customer");
 
-        List<CustomerDTO> cusList = new ArrayList<>();
+        List<Customer> cusList = new ArrayList<>();
 
         while (resultSet.next()) {
             String id = resultSet.getString(1);
@@ -65,7 +66,7 @@ public class CustomerDaoImpl implements CustomerDao {
             String address = resultSet.getString(5);
             String type = resultSet.getString(6);
 
-            CustomerDTO customer = new CustomerDTO(id, name,contact,NIC,address,type);
+            Customer customer = new Customer(id, name,contact,NIC,address,type);
             cusList.add(customer);
         }
         return cusList;

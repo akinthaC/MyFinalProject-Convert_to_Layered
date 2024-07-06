@@ -15,8 +15,5 @@ public class Order {
     private String id;
     private Date date ;
     private Date handOverDate;
-    private int Qty;
-    private String Status;
-    private String Description;
     private String CusId;
 }

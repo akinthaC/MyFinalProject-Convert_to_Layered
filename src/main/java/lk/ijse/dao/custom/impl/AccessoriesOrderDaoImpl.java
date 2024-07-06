@@ -14,7 +14,7 @@ import java.util.List;
 public class AccessoriesOrderDaoImpl implements AccessoriesOrderDao {
     public  boolean save(String ordId, String accId, String status, int qty, String description, Date date) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeSQL("INSERT INTO accessories_order VALUES(?,?,?,?,?,?)",ordId,accId,qty,description,date);
+        return SQLUtil.executeSQL("INSERT INTO accessories_order VALUES(?,?,?,?,?,?)",ordId,accId,qty,description,status,date);
     }
 
     @Override

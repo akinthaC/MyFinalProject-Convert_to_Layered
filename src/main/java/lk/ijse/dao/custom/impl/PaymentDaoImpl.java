@@ -28,8 +28,6 @@ public class PaymentDaoImpl implements PaymentDao {
         return SQLUtil.executeSQL("UPDATE payment SET orderId=?, date= ?, totalAmounr = ?, advance = ?, paytype = ? ,status =? , amountToBePaid =? WHERE payId = ?",payment.getOrdid(),payment.getDate(),payment.getTotal(),payment.getAdvance(),payment.getType(),payment.getStatus(),payment.getAmountToPaid(),payment.getId());
     }
 
-
-
     public  boolean delete(String id) throws SQLException, ClassNotFoundException {
 
 
@@ -70,8 +68,6 @@ public class PaymentDaoImpl implements PaymentDao {
         }
         return null;
     }
-
-
 
     public  Payment searchById(String id) throws SQLException, ClassNotFoundException {
 
@@ -115,7 +111,6 @@ public class PaymentDaoImpl implements PaymentDao {
 
         return obList;
     }
-
     public  PaymentDTO searchByOrId(String id) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = SQLUtil.executeSQL("SELECT * FROM payment WHERE orderId = ?",id);

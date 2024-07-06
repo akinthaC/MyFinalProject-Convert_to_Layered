@@ -172,15 +172,15 @@ public class AccessoriesFormController {
         try {
             List<AccessoriesDTO> accessoriesList = AccessoriesRepo.getAll();
             for (AccessoriesDTO accessories : accessoriesList) {
-                AccessoriesTm tm = new AccessoriesTm(
+                tblAccessories.getItems().add( new AccessoriesTm(
                         accessories.getId(),
                         accessories.getName(),
                         accessories.getQty(),
                         accessories.getNormalPrice(),
                         accessories.getWholesaleprice()
-                );
+                ));
 
-                obList.add(tm);
+
             }
             List<SupAccDTO> supAcc = SupAccRepo.getAll();
             for (SupAccDTO supAcc1 : supAcc) {

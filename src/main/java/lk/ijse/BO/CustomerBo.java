@@ -13,19 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface CustomerBo {
-    public  boolean saveCustomer(CustomerDTO customer) throws SQLException ;
+    public  boolean saveCustomer(CustomerDTO customer) throws SQLException, ClassNotFoundException;
 
-    public  boolean updateCustomer(CustomerDTO customer) throws SQLException ;
+    public  boolean updateCustomer(CustomerDTO customer) throws SQLException, ClassNotFoundException;
 
-    public  CustomerDTO CusSearchById(String id) throws SQLException ;
+    public  CustomerDTO CusSearchById(String id) throws SQLException, ClassNotFoundException;
 
-    public  boolean deleteCustomer(String id) throws SQLException ;
+    public  boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException;
 
-    public  List<CustomerDTO> getAllCustomers() throws SQLException ;
+    public  List<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException;
 
 
-    public  String getCurrentId() throws SQLException;
+    public  String getCurrentId() throws SQLException, ClassNotFoundException;
 
-    public  List<String> getIds() throws SQLException ;
+    public  List<String> getIds() throws SQLException, ClassNotFoundException;
     public  List<String> getStatus() ;
+
 }

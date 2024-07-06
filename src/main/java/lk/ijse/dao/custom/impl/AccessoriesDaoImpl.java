@@ -1,5 +1,6 @@
 package lk.ijse.dao.custom.impl;
 
+import lk.ijse.Entity.Accessories;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.AccessoriesDao;
 import lk.ijse.dto.AccessoriesDTO;
@@ -10,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccessoriesDaoImpl implements AccessoriesDao {
-    public  boolean save(AccessoriesDTO accessories) throws SQLException, ClassNotFoundException {
+    public  boolean save(Accessories accessories) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("INSERT INTO accessories VALUES(?,?,?,?,?)",accessories.getId(),accessories.getName(),accessories.getQty(),accessories.getNormalPrice(),accessories.getWholesaleprice());
 
     }
 
-    public  boolean update(AccessoriesDTO accessories) throws SQLException, ClassNotFoundException {
+    public  boolean update(Accessories accessories) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("UPDATE accessories SET name= ?, qtyOnHand = ?, normalPrice = ?, wholeSalePrice = ? WHERE accId = ?",accessories.getId(),accessories.getName(),accessories.getQty(),accessories.getNormalPrice(),accessories.getWholesaleprice());
     }
@@ -29,12 +30,12 @@ public class AccessoriesDaoImpl implements AccessoriesDao {
         return SQLUtil.executeSQL("DELETE FROM accessories WHERE accId = ?", id);
     }
 
-    public  List<AccessoriesDTO> getAll() throws SQLException, ClassNotFoundException {
+    public  List<Accessories> getAll() throws SQLException, ClassNotFoundException {
 
 
         ResultSet resultSet = SQLUtil.executeSQL("SELECT * FROM accessories");
 
-        List<AccessoriesDTO> accessoriesList = new ArrayList<>();
+        List<Accessories> accessoriesList = new ArrayList<>();
 
         while (resultSet.next()) {
             String accid = resultSet.getString(1);
@@ -44,7 +45,7 @@ public class AccessoriesDaoImpl implements AccessoriesDao {
             String wholesaleprice = resultSet.getString(5);
 
 
-            AccessoriesDTO accessories= new AccessoriesDTO(accid,name,qty,normalprice,wholesaleprice);
+            Accessories accessories= new Accessories(accid,name,qty,normalprice,wholesaleprice);
             accessoriesList.add(accessories);
         }
         return accessoriesList;
@@ -64,7 +65,7 @@ public class AccessoriesDaoImpl implements AccessoriesDao {
 
 
 
-    public  AccessoriesDTO searchById(String id) throws SQLException, ClassNotFoundException {
+    public  Accessories searchById(String id) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = SQLUtil.executeSQL("SELECT * FROM accessories WHERE accId = ?",id);
 
@@ -75,7 +76,7 @@ public class AccessoriesDaoImpl implements AccessoriesDao {
             String normalprice = resultSet.getString(4);
             String wholesaleprice = resultSet.getString(5);
             ;
-            AccessoriesDTO accessories = new AccessoriesDTO(accid,name,qty,normalprice,wholesaleprice);
+            Accessories accessories = new Accessories(accid,name,qty,normalprice,wholesaleprice);
 
 
             return accessories;
