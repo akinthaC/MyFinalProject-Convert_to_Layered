@@ -68,7 +68,7 @@ FROM
         <band height="79" splitType="Stretch">
             <image>
                 <reportElement x="122" y="0" width="44" height="70" uuid="53d1fdf0-a4c8-494f-b938-ed0fef7c8715"/>
-                <imageExpression><![CDATA["/home/akintha/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+                <imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
             </image>
             <staticText>
                 <reportElement x="167" y="0" width="220" height="40" uuid="58758139-3c29-468e-8f4c-eacd8e73d078"/>

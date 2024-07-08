@@ -125,7 +125,7 @@ WHERE
             </staticText>
             <image>
                 <reportElement x="122" y="0" width="44" height="70" uuid="84e1d0b0-bbc0-4318-ab99-02ab659564d2"/>
-                <imageExpression><![CDATA["/home/akintha/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+                <imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
             </image>
             <line>
                 <reportElement x="-10" y="133" width="200" height="1" uuid="fc4d0f7d-3740-406d-858a-01087d136bbb"/>

@@ -1,5 +1,6 @@
 package lk.ijse.BO.custom;
 
+<<<<<<<< HEAD:src/main/java/lk/ijse/BO/custom/SupplierBo.java
 import lk.ijse.BO.SuperBo;
 import lk.ijse.Entity.Supplier;
 import lk.ijse.dao.SQLUtil;
@@ -30,4 +31,7 @@ public interface SupplierBo extends SuperBo {
     public  Supplier searchById(String id) throws SQLException, ClassNotFoundException ;
 
     public  List<String> getIds() throws SQLException, ClassNotFoundException ;
+========
+public interface SupplierBo {
+>>>>>>>> origin/main:src/main/java/lk/ijse/BO/SupplierBo.java
 }
