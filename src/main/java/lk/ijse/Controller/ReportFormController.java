@@ -106,7 +106,7 @@ public class ReportFormController {
 
 
     @FXML
-    void btn7ProfitONAction(ActionEvent event) throws JRException, SQLException {
+    void btn7ProfitONAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/7dayprofit.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -115,13 +115,13 @@ public class ReportFormController {
         data.put("time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
     }
 
     @FXML
-    void btnAstimateONAction(ActionEvent event) throws JRException, SQLException {
+    void btnAstimateONAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/AstimateProfit&days.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -130,13 +130,13 @@ public class ReportFormController {
         data.put("time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
     }
 
     @FXML
-    void btnCustomerOnAction(ActionEvent event) throws JRException, SQLException {
+    void btnCustomerOnAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/PendingPaymentDetail.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -145,7 +145,7 @@ public class ReportFormController {
         data.put("time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
     }
@@ -161,7 +161,7 @@ public class ReportFormController {
     }
 
     @FXML
-    void btnYearProfitONAction(ActionEvent event) throws JRException, SQLException {
+    void btnYearProfitONAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/lastYearProfit.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -170,12 +170,12 @@ public class ReportFormController {
         data.put("time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
     }
     @FXML
-    void btnTodayProfitONAction(ActionEvent event) throws JRException, SQLException {
+    void btnTodayProfitONAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/oneDayProfit.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -184,7 +184,7 @@ public class ReportFormController {
         data.put("time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
 

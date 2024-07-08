@@ -13,9 +13,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.CustomerBoImpl;
 import lk.ijse.dto.CustomerDTO;
 import lk.ijse.model.tm.CustomerTm;
-import lk.ijse.repository.CustomerRepo;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -93,6 +94,7 @@ public class CustomerFormController {
     @FXML
     private JFXComboBox<String> cmbType;
 
+    CustomerBoImpl customerBo = (CustomerBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.CUSTOMER);
     public void initialize() throws IOException {
         setDate();
         setTime();
@@ -109,7 +111,7 @@ public class CustomerFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
 
-        List<String> idList = CustomerRepo.getStatus();
+        List<String> idList = customerBo.getStatus();
 
         for(String value : idList) {
             obList.add(value);
@@ -122,12 +124,14 @@ public class CustomerFormController {
 
     private void getCurrentOrderId() {
         try {
-            String currentId = CustomerRepo.getCurrentId();
+            String currentId = customerBo.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             txtId.setText(nextOrderId);
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -150,7 +154,7 @@ public class CustomerFormController {
         ObservableList<CustomerTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDTO> customerList = CustomerRepo.getAll();
+            List<CustomerDTO> customerList = customerBo.getAllCustomers();
             for (CustomerDTO customer : customerList) {
                 CustomerTm tm = new CustomerTm(
                         customer.getId(),
@@ -165,7 +169,7 @@ public class CustomerFormController {
             }
 
             tblCustomer.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -208,7 +212,7 @@ public class CustomerFormController {
 
 
         try {
-            boolean isDeleted = CustomerRepo.delete(id);
+            boolean isDeleted = customerBo.deleteCustomer(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
                 setCellValueFactory();
@@ -216,7 +220,7 @@ public class CustomerFormController {
                 clearFields();
                 getCurrentOrderId();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
@@ -244,7 +248,7 @@ public class CustomerFormController {
 
 
         try {
-            boolean isSaved = CustomerRepo.save(customer);
+            boolean isSaved = customerBo.saveCustomer(customer);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Coustomer saved!!!.").show();
                 setCellValueFactory();
@@ -252,7 +256,7 @@ public class CustomerFormController {
                 clearFields();
                 getCurrentOrderId();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -278,7 +282,7 @@ public class CustomerFormController {
         CustomerDTO customer = new CustomerDTO(id, name, contact, NIC, address, type);
 
         try {
-            boolean isUpdated = CustomerRepo.update(customer);
+            boolean isUpdated = customerBo.updateCustomer(customer);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
                 clearFields();
@@ -286,7 +290,7 @@ public class CustomerFormController {
                 loadAllCustomers();
                 getCurrentOrderId();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
@@ -305,10 +309,10 @@ public class CustomerFormController {
 
 
     @FXML
-    void searchBy(ActionEvent event) throws SQLException {
+    void searchBy(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = txtId.getText();
 
-        CustomerDTO customer = CustomerRepo.searchById(id);
+        CustomerDTO customer = customerBo.CusSearchById(id);
         if (customer != null) {
             txtId.setText(customer.getId());
             txtName.setText(customer.getName());
