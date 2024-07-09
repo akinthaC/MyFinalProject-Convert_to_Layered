@@ -2,12 +2,12 @@ package lk.ijse.BO.custom.impl;
 
 import lk.ijse.BO.custom.PlaceOrderBo;
 import lk.ijse.Db.DbConnection;
+import lk.ijse.Entity.*;
 import lk.ijse.dao.DAOFactory;
-import lk.ijse.dao.custom.AccessoriesDao;
-import lk.ijse.dao.custom.FishDao;
+import lk.ijse.dao.custom.*;
 import lk.ijse.dto.OrderDetailDTO;
 import lk.ijse.dto.PlaceOrderDTO;
-import lk.ijse.repository.*;
+
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,6 +15,10 @@ import java.sql.SQLException;
 public class PlaceOrderBoImpl implements PlaceOrderBo {
     AccessoriesDao accessoriesDao =(AccessoriesDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.ACCESSORIES);
     FishDao fishDao =(FishDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.FISH);
+    OrderDao orderDao =(OrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.ORDER);
+    AccessoriesOrderDao accessoriesOrderDao=(AccessoriesOrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.ACCESSORIESORDER);
+    FishOrderDao fishOrderDao = (FishOrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.FISHORDER);
+    OrderEmployeeDao orderEmployeeDao=(OrderEmployeeDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.OREDREMPLOYEE);
     Connection connection = null;
     @Override
     public boolean orders(PlaceOrderDTO pl) throws SQLException, ClassNotFoundException {
@@ -22,7 +26,7 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
         connection.setAutoCommit(false);
 
         try {
-            boolean isOrderSaved = OrderRepo.save(pl.getOrder());
+            boolean isOrderSaved = orderDao.save(new Order(pl.getOrder().getId(),pl.getOrder().getDate(), pl.getOrder().getHandOverDate(), pl.getOrder().getCusId()));
             if (isOrderSaved) {
                 boolean isQtyUpdated = false;
                 for (OrderDetailDTO od : pl.getOdlist()) {
@@ -40,16 +44,16 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
                     for (OrderDetailDTO od : pl.getOdlist()){
                         if (od.getFishId() == null) {
 
-                            isSave = accessoriesOrderRepo.save(od.getOrdId(),od.getAccId(),od.getStatus(),od.getQty(),od.getDescription(),od.getDate());
+                            isSave = accessoriesOrderDao.save(new AccessoriesOrder(od.getOrdId(),od.getAccId(),od.getQty(),od.getStatus(),od.getDescription(),od.getDate()));
 
                         } else {
-                            isSave = fishOrderRepo.save(od.getOrdId(),od.getFishId(),od.getStatus(),od.getQty(),od.getDescription(),od.getDate());
+                            isSave = fishOrderDao.save(new FishOrder(od.getOrdId(),od.getFishId(),od.getQty(),od.getStatus(),od.getDescription(),od.getDate()));
                         }
                     }
                     if (isSave ) {
                         boolean isSave1 = false;
                         for (OrderDetailDTO od : pl.getOdlist()) {
-                            isSave1 = orderEmployeeRepo.save(od.getOrdId(),od.getEmpId());
+                            isSave1 = orderEmployeeDao.save(new OrderEmployee(od.getOrdId(),od.getEmpId()));
                         }
                         if (isSave1) {
                             connection.commit();

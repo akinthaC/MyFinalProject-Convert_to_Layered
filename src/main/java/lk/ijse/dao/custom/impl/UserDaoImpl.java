@@ -50,7 +50,12 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    public User searchById(String name) throws SQLException, ClassNotFoundException {
+    @Override
+    public User searchById(String id) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    public User searchByName(String name) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = SQLUtil.executeSQL("SELECT * FROM user WHERE userName = ?",name);
         if (resultSet.next()) {

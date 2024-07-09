@@ -2,6 +2,10 @@ package lk.ijse.Controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.AccessoriesBoImpl;
+import lk.ijse.BO.custom.impl.SupAccBoImpl;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
 import lk.ijse.dto.AccessoriesDTO;
 import lk.ijse.dto.SupAccDTO;
 import lk.ijse.dto.SupplierDTO;
@@ -18,7 +22,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.model.tm.SupAccTm;
-import lk.ijse.repository.*;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -80,6 +83,9 @@ public class AddNewQtyAccessoriesController {
     private TextField txtpurchasedAmount;
 
     public String SupId;
+    SupAccBoImpl supAccBo = (SupAccBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
+    AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
+    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
 
     public void initialize() throws IOException, SQLException {
         setDate();
@@ -107,7 +113,7 @@ public class AddNewQtyAccessoriesController {
         try {
 
 
-            List<SupAccDTO> supAcc = SupAccRepo.getAll();
+            List<SupAccDTO> supAcc = supAccBo.getAll();
             for (SupAccDTO supAcc1 : supAcc) {
 
                 SupAccTm tm1 = new SupAccTm(
@@ -121,7 +127,7 @@ public class AddNewQtyAccessoriesController {
 
             }
             tblAccSupFIsh.setItems(obList2);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -157,7 +163,7 @@ public class AddNewQtyAccessoriesController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = SupAccRepo.getIds();
+            List<String> idList = supAccBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -166,7 +172,7 @@ public class AddNewQtyAccessoriesController {
              cmbAccId.setItems(obList);
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -210,9 +216,9 @@ public class AddNewQtyAccessoriesController {
         SupAccDTO supAcc = new SupAccDTO(accID, supId, date, qty,amount);
 
         try {
-            boolean isUpdate = AccessoriesRepo.updateSupAcc(qty, accID);
+            boolean isUpdate = accessoriesBo.updateSupAcc(qty, accID);
             if (isUpdate) {
-                boolean isSaved = SupAccRepo.save(supAcc);
+                boolean isSaved = supAccBo.save(supAcc);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Qty Is Updated").show();
                     loadAllSupFIsh();
@@ -230,7 +236,7 @@ public class AddNewQtyAccessoriesController {
     void cmbAccIdOnAction(ActionEvent event) {
         String id = cmbAccId.getValue();
         try {
-            AccessoriesDTO accessories = AccessoriesRepo.searchById(id);
+            AccessoriesDTO accessories = accessoriesBo.searchById(id);
 
             if (accessories != null) {
 
@@ -238,7 +244,7 @@ public class AddNewQtyAccessoriesController {
 
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -256,7 +262,7 @@ public class AddNewQtyAccessoriesController {
 
         try {
 
-            List<String> idList = SupplierRepo.searchNIC();
+            List<String> idList = supplierBo.searchNIC();
 
             for (String NIC : idList){
                 if (NIC.contains(enterText)){
@@ -271,13 +277,13 @@ public class AddNewQtyAccessoriesController {
 
         String NIC = cmbSup.getValue();
         try {
-            SupplierDTO supplier = SupplierRepo.searchByNIC(NIC);
+            SupplierDTO supplier = supplierBo.searchByNIC(NIC);
             if(supplier!=null) {
                 lblSup.setText(supplier.getName());
                 SupId=supplier.getId();
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

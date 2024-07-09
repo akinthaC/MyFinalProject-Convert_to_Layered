@@ -27,7 +27,7 @@ public class SupplierBOImpl implements SupplierBo {
     @Override
     public SupplierDTO searchByNIC(String nic) throws SQLException, ClassNotFoundException {
         Supplier supplier= supplierDao.searchByNIC(nic);
-        return new  SupplierDTO(supplier.getId(),supplier.getName(),supplier.getContact(),supplier.getNIC(),supplier.getAddress());
+        return new SupplierDTO(supplier.getId(),supplier.getName(),supplier.getContact(),supplier.getNIC(),supplier.getAddress());
     }
 
     @Override

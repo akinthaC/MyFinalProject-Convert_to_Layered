@@ -3,6 +3,7 @@ package lk.ijse.BO.custom;
 import lk.ijse.BO.SuperBo;
 import lk.ijse.Entity.Fish;
 import lk.ijse.dao.SQLUtil;
+import lk.ijse.dto.FishDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,15 +13,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface FishBo extends SuperBo {
-    public  boolean save(Fish fish) throws SQLException, ClassNotFoundException ;
+    public  boolean save(FishDTO fish) throws SQLException, ClassNotFoundException ;
 
-    public  boolean update(Fish fish) throws SQLException, ClassNotFoundException ;
+    public  boolean update(FishDTO fish) throws SQLException, ClassNotFoundException ;
 
-    public  Fish searchById(String id) throws SQLException, ClassNotFoundException ;
+    public  FishDTO searchById(String id) throws SQLException, ClassNotFoundException ;
 
     public  boolean delete(String id) throws SQLException, ClassNotFoundException ;
 
-    public List<Fish> getAll() throws SQLException, ClassNotFoundException ;
+    public List<FishDTO> getAll() throws SQLException, ClassNotFoundException ;
 
     public  String getCurrentId() throws SQLException, ClassNotFoundException ;
 

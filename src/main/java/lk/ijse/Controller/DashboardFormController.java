@@ -22,11 +22,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.DashboardBoImpl;
+import lk.ijse.BO.custom.impl.FishBoImpl;
+import lk.ijse.BO.custom.impl.OrderBoImpl;
+import lk.ijse.BO.custom.impl.UserBoImpl;
 import lk.ijse.Db.DbConnection;
-import lk.ijse.repository.DashBoardRepo;
 import javafx.scene.chart.LineChart;
-import lk.ijse.repository.FishRepo;
-import lk.ijse.repository.OrderRepo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,7 +81,11 @@ public class DashboardFormController {
     @FXML
     private PieChart pieChart;
 
-    public void initialize() throws IOException, SQLException {
+    OrderBoImpl orderBo = (OrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
+    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    DashboardBoImpl dashboardBo = (DashboardBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.DASHBOARD);
+
+    public void initialize() throws IOException, SQLException, ClassNotFoundException {
         LineChart();
         setDate();
         setTime();
@@ -92,10 +98,10 @@ public class DashboardFormController {
         animateLabelTyping();
     }
 
-    private void pieChart() {
+    private void pieChart() throws SQLException, ClassNotFoundException {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
-        Map<String, Integer> FishDetail = FishRepo.GetFishDetail();
+        Map<String, Integer> FishDetail = fishBo.GetFishDetail();
 
         for (Map.Entry<String, Integer> entry : FishDetail.entrySet()) {
             pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
@@ -106,10 +112,10 @@ public class DashboardFormController {
 
     }
 
-    private void LineChart() {
+    private void LineChart() throws SQLException, ClassNotFoundException {
         XYChart.Series series = new XYChart.Series();
 
-        Map<String, Integer> stocksByDay = OrderRepo.getOrderCountByDay();
+        Map<String, Integer> stocksByDay = orderBo.getOrderCountByDay();
 
         for (Map.Entry<String, Integer> entry : stocksByDay.entrySet()) {
             series.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
@@ -152,20 +158,20 @@ public class DashboardFormController {
     }
 
 
-    private void getEmployeeCount() throws SQLException {
-        String count = DashBoardRepo.getEmployeeCount();
+    private void getEmployeeCount() throws SQLException, ClassNotFoundException {
+        String count = dashboardBo.getEmployeeCount();
         lblECount.setText(count);
     }
 
-    private void getMostSaleFishWeekly() throws SQLException {
-        String description = DashBoardRepo.getMostSaleFishWeekly();
+    private void getMostSaleFishWeekly() throws SQLException, ClassNotFoundException {
+        String description = dashboardBo.getMostSaleFishWeekly();
         lblPFish.setText(description);
 
     }
 
-    private void getTodaySaleCOunt() throws SQLException {
+    private void getTodaySaleCOunt() throws SQLException, ClassNotFoundException {
         Date date = Date.valueOf(LocalDate.now());
-        String count = DashBoardRepo.getSaleCount(date);
+        String count = dashboardBo.getSaleCount(date);
         lblTSale.setText(count);
 
 

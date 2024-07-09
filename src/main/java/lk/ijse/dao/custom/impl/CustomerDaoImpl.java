@@ -24,7 +24,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     public  boolean update(Customer customer) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeSQL("UPDATE customer SET cusName = ? , contact = ?, NIC = ?, address = ?, type = ? WHERE cusId = ? ", customer.getName(),customer.getAddress(),customer.getContact(),customer.getNIC(),customer.getType(),customer.getId());
+        return SQLUtil.executeSQL("UPDATE customer SET cusName = ? , contact = ?, NIC = ?, addrerss = ?, type = ? WHERE cusId = ? ", customer.getName(),customer.getContact(),customer.getNIC(),customer.getAddress(),customer.getType(),customer.getId());
     }
 
     public Customer searchById(String id) throws SQLException, ClassNotFoundException {

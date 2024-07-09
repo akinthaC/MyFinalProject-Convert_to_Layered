@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import lk.ijse.repository.UserRepo;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
+import lk.ijse.BO.custom.impl.UserBoImpl;
 import lk.ijse.utill.Regex;
 
 import java.time.LocalDate;
@@ -48,6 +50,8 @@ public class ChangeEmailController {
 
     @FXML
     private TextField txtEmail;
+
+    UserBoImpl userBo = (UserBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
 
     public void initialize(){
         lblUserName.setText(NewLoginFormController.userName1);
@@ -96,7 +100,7 @@ public class ChangeEmailController {
 
             if (email.equalsIgnoreCase(reEnterEmail)) {
 
-                boolean isUpdated = UserRepo.update1(email, userName);
+                boolean isUpdated = userBo.update1(email, userName);
                 if (isUpdated) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Email Updated!!").show();
                 } else {

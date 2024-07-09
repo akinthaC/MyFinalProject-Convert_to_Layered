@@ -237,7 +237,7 @@ public class NewLoginFormController implements Initializable {
         timeline.play();
     }
     @FXML
-    void btnLoginOnAction(ActionEvent event) throws IOException, SQLException {
+    void btnLoginOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         String userName=txtUserName.getText();
         String password=txtPassword.getText();
         userName1=userName;
@@ -274,10 +274,10 @@ public class NewLoginFormController implements Initializable {
         stPassword.play();
     }
 
-    private void checkCredential(String userName, String password) throws SQLException, IOException {
+    private void checkCredential(String userName, String password) throws SQLException, IOException, ClassNotFoundException {
         String sql = "SELECT userName, password,email FROM user WHERE userName = ?";
 
-        Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setObject(1, userName);
 

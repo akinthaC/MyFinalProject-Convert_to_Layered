@@ -1,6 +1,7 @@
 package lk.ijse.BO.custom.impl;
 
 import lk.ijse.BO.custom.UserBo;
+import lk.ijse.Entity.User;
 import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.FishOrderDao;
 import lk.ijse.dao.custom.UserDao;
@@ -11,6 +12,12 @@ import java.util.List;
 
 public class UserBoImpl implements UserBo {
     UserDao userDao = (UserDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.USER);;
+
+    @Override
+    public User searchByName(String name) throws SQLException, ClassNotFoundException {
+        return userDao.searchByName(name);
+    }
+
     @Override
     public List<String> searchName() throws SQLException, ClassNotFoundException {
         return  userDao.searchName();

@@ -2,6 +2,8 @@ package lk.ijse.Controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.*;
 import lk.ijse.dto.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,7 +22,6 @@ import javafx.util.Duration;
 import lk.ijse.Db.DbConnection;
 
 import lk.ijse.model.tm.cartTm;
-import lk.ijse.repository.*;
 import lk.ijse.utill.Regex;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -132,6 +133,15 @@ public class OrderFormController {
     private TextField txtQty;
 
     private ObservableList<cartTm> obList = FXCollections.observableArrayList();
+    AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
+    SupAccBoImpl supAccBo = (SupAccBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
+    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    SupFishBoImpl supFishBo = (SupFishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
+    OrderBoImpl orderBo = (OrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
+    PlaceOrderBoImpl placeOrderBo = (PlaceOrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PLACEORDER);
+    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    EmployeeBoImpl employeeBo = (EmployeeBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.EMPLOYEE);
+    CustomerBoImpl customerBo = (CustomerBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.CUSTOMER);
 
     public void initialize() {
         setDate();
@@ -164,7 +174,7 @@ public class OrderFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
 
-        List<String> idList = OrderRepo.getStatus();
+        List<String> idList = orderBo.getStatus();
 
         for(String value : idList) {
             obList.add(value);
@@ -179,7 +189,7 @@ public class OrderFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = AccessoriesRepo.getIds();
+            List<String> idList = accessoriesBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -188,7 +198,7 @@ public class OrderFormController {
             cmbAccessorieId.setItems(obList);
             cmbFishId.getSelectionModel().clearSelection();
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -197,7 +207,7 @@ public class OrderFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = FishRepo.getIds();
+            List<String> idList = fishBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -208,6 +218,8 @@ public class OrderFormController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -215,7 +227,7 @@ public class OrderFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = EmployeeRepo.getIds();
+            List<String> idList = employeeBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -223,7 +235,7 @@ public class OrderFormController {
 
             cmbEmployeeId.setItems(obList);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -231,12 +243,14 @@ public class OrderFormController {
 
     private void getCurrentOrderId() {
         try {
-            String currentId = OrderRepo.getCurrentId();
+            String currentId = orderBo.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             txtId.setText(nextOrderId);
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -419,7 +433,7 @@ public class OrderFormController {
 
 
 
-        OrderDTO order = new OrderDTO(orderId, date, handOverDate, qty, cusId);
+        OrderDTO order = new OrderDTO(orderId, date, handOverDate, cusId);
         List<OrderDetailDTO> odList = new ArrayList<>();
 
         for (int i = 0; i < tblPlaceOrder.getItems().size(); i++) {
@@ -457,7 +471,7 @@ public class OrderFormController {
         PlaceOrderDTO pl= new PlaceOrderDTO(order,odList);
 
         try {
-            boolean isPlaced = PlaceOrderRepo.orders(pl);
+            boolean isPlaced = placeOrderBo.orders(pl);
             if (isPlaced) {
                  new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
                 if (lblType.getText().equals("normal")) {
@@ -481,6 +495,8 @@ public class OrderFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -507,7 +523,7 @@ public class OrderFormController {
     void cmbAccessorieIdOnAction(ActionEvent event) {
         String id = cmbAccessorieId.getValue();
         try {
-           AccessoriesDTO accessories = AccessoriesRepo.searchById(id);
+           AccessoriesDTO accessories = accessoriesBo.searchById(id);
 
             if (accessories != null) {
 
@@ -521,6 +537,8 @@ public class OrderFormController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -529,12 +547,14 @@ public class OrderFormController {
     void cmbCusIdOnAction(ActionEvent event) {
         String id = cmbCusId.getValue();
         try {
-            CustomerDTO customer = CustomerRepo.searchById(id);
+            CustomerDTO customer = customerBo.CusSearchById(id);
 
             lblCustomerName.setText(customer.getName());
             lblType.setText(customer.getType());
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -544,11 +564,11 @@ public class OrderFormController {
     void cmbEmployeeIdOnAction(ActionEvent event) {
         String id = cmbEmployeeId.getValue();
         try {
-            EmployeeDTO employee=EmployeeRepo.searchById(id);
+            EmployeeDTO employee=employeeBo.searchById(id);
 
             lblEmpName.setText(employee.getName());
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -559,7 +579,7 @@ public class OrderFormController {
     void cmbFishIdOnAction(ActionEvent event) {
         String id = cmbFishId.getValue();
         try {
-            FishDTO fish= FishRepo.searchById(id);
+            FishDTO fish= fishBo.searchById(id);
 
             if (fish != null) {
 
@@ -570,7 +590,7 @@ public class OrderFormController {
                 cmbAccessorieId.getSelectionModel().clearSelection();
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -585,7 +605,7 @@ public class OrderFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = CustomerRepo.getIds();
+            List<String> idList = customerBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -593,7 +613,7 @@ public class OrderFormController {
 
             cmbCusId.setItems(obList);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -604,7 +624,7 @@ public class OrderFormController {
 
 
     }
-    public void btnPrintBill() throws JRException, SQLException {
+    public void btnPrintBill() throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/CustomerBill.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -616,11 +636,11 @@ public class OrderFormController {
         data.put("Time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
     }
-    public void btnPrintBillWholeSale() throws JRException, SQLException {
+    public void btnPrintBillWholeSale() throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/WholeSaleCustomerBill.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -632,7 +652,7 @@ public class OrderFormController {
         data.put("Time",lblTime.getText());
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getDbConnection().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
     }

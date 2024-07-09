@@ -19,14 +19,17 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.FishBoImpl;
+import lk.ijse.BO.custom.impl.SupFishBoImpl;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
+import lk.ijse.Entity.Fish;
+import lk.ijse.Entity.Supplier;
 import lk.ijse.dto.FishDTO;
 import lk.ijse.dto.SupFishDTO;
 import lk.ijse.dto.SupplierDTO;
 import lk.ijse.model.tm.FishTm;
 import lk.ijse.model.tm.SupFishTm;
-import lk.ijse.repository.FishRepo;
-import lk.ijse.repository.SupFishRepo;
-import lk.ijse.repository.SupplierRepo;
 import lk.ijse.utill.Regex;
 
 
@@ -92,6 +95,10 @@ public class FishFormController {
     @FXML
     private TextField txtpurchasedAmount;
 
+    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    SupFishBoImpl supFishBo = (SupFishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
+
 
     public void initialize() throws IOException, SQLException {
         setDate();
@@ -108,7 +115,7 @@ public class FishFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = SupplierRepo.getIds();
+            List<String> idList = supplierBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -116,19 +123,21 @@ public class FishFormController {
 
             cmbSup.setItems(obList);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void getCurrentOrderId() {
         try {
-            String currentId = FishRepo.getCurrentId();
+            String currentId = fishBo.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             txtFishId.setText(nextOrderId);
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -153,7 +162,7 @@ public class FishFormController {
 
 
         try {
-            List<FishDTO> fishList = FishRepo.getAll();
+            List<FishDTO> fishList = fishBo.getAll();
             for (FishDTO fish : fishList) {
 
                 FishTm tm = new FishTm(
@@ -168,7 +177,7 @@ public class FishFormController {
                 obList.add(tm);
             }
 
-                List<SupFishDTO> supFishList = SupFishRepo.getAll();
+                List<SupFishDTO> supFishList = supFishBo.getAll();
                 for (SupFishDTO supFish : supFishList) {
 
                    SupFishTm tm1 = new SupFishTm(
@@ -185,7 +194,7 @@ public class FishFormController {
 
             tblAccSupFIsh.setItems(obList2);
             tblFish.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -241,7 +250,7 @@ public class FishFormController {
         String id = txtFishId.getText();
 
         try {
-            boolean isDeleted = FishRepo.delete(id);
+            boolean isDeleted = fishBo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Fish deleted!").show();
                 clearFields();
@@ -250,11 +259,13 @@ public class FishFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) throws SQLException {
+    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id=txtFishId.getText();
         String name = txtFishName.getText();
         String qtyOnHand = txtQtyOnHand.getText();
@@ -267,7 +278,7 @@ public class FishFormController {
             new Alert(Alert.AlertType.INFORMATION, "Please fill all fields!");
         }
 
-        String supId=SupplierRepo.getId(cmbSup.getValue());
+        String supId=supplierBo.getId(cmbSup.getValue());
         System.out.println("supId = " + supId);
         int Qty= 0;
         double amount= 0;
@@ -295,9 +306,9 @@ public class FishFormController {
 
 
         try {
-            boolean isSaved = FishRepo.save(fish);
+            boolean isSaved = fishBo.save(fish);
             if (isSaved) {
-                boolean isSaved1 = SupFishRepo.save(supFish);
+                boolean isSaved1 = supFishBo.save(supFish);
                 if (isSaved1 ) {
                     clearFields();
                     loadAllFish();
@@ -334,7 +345,7 @@ public class FishFormController {
         FishDTO fish = new FishDTO(id, name, qtyONnHand,normalPrice,wholeSalePrice);
 
         try {
-            boolean isUpdated = FishRepo.update(fish);
+            boolean isUpdated = fishBo.update(fish);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Fish updated!").show();
                 clearFields();
@@ -342,16 +353,16 @@ public class FishFormController {
                 loadAllFish();
 
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
+    void txtSearchOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = txtFishId.getText();
 
-      FishDTO fish = FishRepo.searchById(id);
+      FishDTO fish = fishBo.searchById(id);
         if (fish != null) {
             txtFishId.setText(fish.getId());
             txtFishName.setText(fish.getName());
@@ -369,14 +380,14 @@ public class FishFormController {
     void cmbSupOnAction(ActionEvent event) {
         String id = cmbSup.getValue();
         try {
-            SupplierDTO supplier = SupplierRepo.searchById(id);
+            Supplier supplier = supplierBo.searchById(id);
 
             lblSup.setText(supplier.getName());
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        
+
 
     }
 

@@ -11,8 +11,9 @@ import lk.ijse.dto.SupFishDTO;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public class OrderEmployeeBoImpl implements OrderEmployeeBo {
-    OrderEmployeeDao orderEmployeeDao=(OrderEmployeeDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.OREDREMPLOYEE);;
+    OrderEmployeeDao orderEmployeeDao=(OrderEmployeeDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.OREDREMPLOYEE);
     @Override
     public boolean save(String ordId, String empId) throws SQLException, ClassNotFoundException {
         return orderEmployeeDao.save(new OrderEmployee(ordId,empId));

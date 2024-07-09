@@ -20,8 +20,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.UserBoImpl;
+import lk.ijse.Entity.User;
 import lk.ijse.dto.UserDTO;
-import lk.ijse.repository.UserRepo;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -47,6 +49,7 @@ public class ForgetPasswordForm1Controller {
 
     @FXML
     private AnchorPane rootNode;
+    UserBoImpl userBo = (UserBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
 
     public void initialize() throws IOException {
         cmbserName.setEditable(true);
@@ -136,7 +139,7 @@ public class ForgetPasswordForm1Controller {
 
         try {
 
-            List<String> idList = UserRepo.searchName();
+            List<String> idList = userBo.searchName();
 
             for (String name : idList){
                 if (name.contains(enterText)){
@@ -151,12 +154,14 @@ public class ForgetPasswordForm1Controller {
 
         String name = cmbserName.getValue();
         try {
-            UserDTO user = UserRepo.searchById(name);
+            User user = userBo.searchByName(name);
             if(user!=null) {
                 txtEmail.setText(user.getEmail());
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 

@@ -10,9 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.PaymentBoImpl;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
 import lk.ijse.dto.PaymentDTO;
 import lk.ijse.model.tm.PaymentTm;
-import lk.ijse.repository.PaymentRepo;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -75,6 +77,7 @@ public class AddPaymentController {
 
     @FXML
     private TextField txtAmount;
+    PaymentBoImpl paymentBo = (PaymentBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PAYMENT);
     public void initialize() throws IOException {
         setDate();
         setTime();
@@ -117,7 +120,7 @@ public class AddPaymentController {
         }
 
         try {
-            boolean isSaved = PaymentRepo.update1(id,advance1,AmountToPaid,Status);
+            boolean isSaved = paymentBo.update1(id,advance1,AmountToPaid,Status);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "payment Successfully !!!.").show();
                 clearFields();
@@ -125,7 +128,7 @@ public class AddPaymentController {
                 loadAllPayment();
 
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
@@ -146,7 +149,7 @@ public class AddPaymentController {
         String id = (String) cmbOrder.getValue();
         try {
 
-            PaymentDTO payment = PaymentRepo.searchByOrId(id);
+            PaymentDTO payment = paymentBo.searchByOrId(id);
             if (payment != null) {
                 lblPayId.setText(payment.getId());
                 lblTotalAmount.setText(String.valueOf(payment.getTotal()));
@@ -154,6 +157,8 @@ public class AddPaymentController {
                 lblAmountTOBePaid.setText(String.valueOf(payment.getAmountToPaid()));
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -163,7 +168,7 @@ public class AddPaymentController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = PaymentRepo.getOrIds();
+            List<String> idList = paymentBo.getOrIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -173,14 +178,16 @@ public class AddPaymentController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-    }
+        }
 
     private void loadAllPayment() {
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<PaymentDTO> paymentList = PaymentRepo.getAll();
+            List<PaymentDTO> paymentList = paymentBo.getAll();
             for (PaymentDTO payment : paymentList) {
                 PaymentTm tm = new PaymentTm(
                         payment.getId(),
@@ -198,6 +205,8 @@ public class AddPaymentController {
 
             tblPayment.setItems(obList);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 

@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 
 public class FishOrderBoImpl implements FishOrderBo {
-    FishOrderDao fishOrderDao = (FishOrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.FISH);;
+    FishOrderDao fishOrderDao = (FishOrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.FISHORDER);;
     @Override
     public boolean save(String ordId, String fishId, String status, int qty, String description, Date date) throws SQLException, ClassNotFoundException {
         return fishOrderDao.save(new FishOrder(ordId, fishId, qty, description, status, date));

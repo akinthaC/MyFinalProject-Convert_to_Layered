@@ -19,8 +19,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
 import lk.ijse.BO.custom.AccessoriesBo;
+import lk.ijse.BO.custom.SupAccBo;
+import lk.ijse.BO.custom.SupplierBo;
 import lk.ijse.BO.custom.impl.AccessoriesBoImpl;
 import lk.ijse.BO.custom.impl.CustomerBoImpl;
+import lk.ijse.BO.custom.impl.SupAccBoImpl;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
+import lk.ijse.Entity.Supplier;
 import lk.ijse.dao.custom.AccessoriesDao;
 import lk.ijse.dao.custom.impl.AccessoriesDaoImpl;
 import lk.ijse.dto.AccessoriesDTO;
@@ -28,9 +33,6 @@ import lk.ijse.dto.SupAccDTO;
 import lk.ijse.dto.SupplierDTO;
 import lk.ijse.model.tm.AccessoriesTm;
 import lk.ijse.model.tm.SupAccTm;
-import lk.ijse.repository.AccessoriesRepo;
-import lk.ijse.repository.SupAccRepo;
-import lk.ijse.repository.SupplierRepo;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -112,6 +114,8 @@ public class AccessoriesFormController {
     @FXML
     private TextField txtWholeSalePrice;
     AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
+    SupAccBoImpl supAccBo = (SupAccBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
+    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
 
     public void initialize() throws IOException {
         setDate();
@@ -183,7 +187,7 @@ public class AccessoriesFormController {
 
 
             }
-            List<SupAccDTO> supAcc = SupAccRepo.getAll();
+            List<SupAccDTO> supAcc = supAccBo.getAll();
             for (SupAccDTO supAcc1 : supAcc) {
 
                 SupAccTm tm1 = new SupAccTm(
@@ -260,7 +264,7 @@ public class AccessoriesFormController {
         String id = txtAccessorieId.getText();
 
         try {
-            boolean isDeleted = accessoriesDao.delete(id);
+            boolean isDeleted = accessoriesBo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Accessorie deleted!").show();
                 clearFields();
@@ -286,14 +290,14 @@ public class AccessoriesFormController {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) throws SQLException {
+    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id=txtAccessorieId.getText();
         String name = txtAccessoriesName.getText();
         String qty = txtQtyOnHand.getText();
         String normalPrice = txtNormalPrice.getText();
         String wholeSalePrice = txtWholeSalePrice.getText();
 
-        String supId=SupplierRepo.getId(cmbSupplier.getValue());
+        String supId=supplierBo.getId(cmbSupplier.getValue());
         System.out.println("supId = " + supId);
         int Qty= Integer.parseInt(txtQtyOnHand.getText());
         Date date = Date.valueOf(LocalDate.now());
@@ -315,9 +319,9 @@ public class AccessoriesFormController {
 
 
         try {
-            boolean isSaved = AccessoriesRepo.save(accessories);
+            boolean isSaved = accessoriesBo.save(accessories);
             if (isSaved) {
-                boolean isSaved1 = SupAccRepo.save(supAcc);
+                boolean isSaved1 = supAccBo.save(supAcc);
                 if (isSaved1) {
                     clearFields();
                     setCellValueFactory();
@@ -354,14 +358,14 @@ public class AccessoriesFormController {
         AccessoriesDTO accessories = new AccessoriesDTO(id, name, qty,normalPrice,wholeSalePrice);
 
         try {
-            boolean isUpdated = AccessoriesRepo.update(accessories);
+            boolean isUpdated = accessoriesBo.update(accessories);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Accessories updated!").show();
                 clearFields();
                 setCellValueFactory();
                 loadAllAccessories();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
@@ -369,10 +373,10 @@ public class AccessoriesFormController {
     }
 
     @FXML
-    void cmbSupplierOnAction(ActionEvent event) {
+    void cmbSupplierOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbSupplier.getValue();
         try {
-            SupplierDTO supplier = SupplierRepo.searchById(id);
+            Supplier supplier = supplierBo.searchById(id);
 
             lblSupName.setText(supplier.getName());
 
@@ -384,10 +388,10 @@ public class AccessoriesFormController {
     }
 
     @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
+    void txtSearchOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = txtAccessorieId.getText();
 
-        AccessoriesDTO accessories = AccessoriesRepo.searchById(id);
+        AccessoriesDTO accessories = accessoriesBo.searchById(id);
         if (accessories != null) {
             txtAccessorieId.setText(accessories.getId());
             txtAccessoriesName.setText(accessories.getName());

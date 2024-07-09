@@ -6,27 +6,29 @@ import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.CustomerDao;
 import lk.ijse.dao.custom.FishDao;
 import lk.ijse.dao.custom.impl.FishDaoImpl;
+import lk.ijse.dto.FishDTO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class FishBoImpl implements FishBo {
     FishDao fishDao = (FishDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.FISH);
     @Override
-    public boolean save(Fish fish) throws SQLException, ClassNotFoundException {
-        return fishDao.save(fish);
+    public boolean save(FishDTO fish) throws SQLException, ClassNotFoundException {
+        return fishDao.save(new Fish(fish.getId(),fish.getName(),fish.getQty(),fish.getNormalPrice(),fish.getWholesaleprice()));
     }
 
     @Override
-    public boolean update(Fish fish) throws SQLException, ClassNotFoundException {
-        return fishDao.update(fish);
+    public boolean update(FishDTO fish) throws SQLException, ClassNotFoundException {
+        return fishDao.update(new Fish(fish.getId(),fish.getName(),fish.getQty(),fish.getNormalPrice(),fish.getWholesaleprice()));
     }
 
     @Override
-    public Fish searchById(String id) throws SQLException, ClassNotFoundException {
+    public FishDTO searchById(String id) throws SQLException, ClassNotFoundException {
         Fish fish = fishDao.searchById(id);
-        return fish;
+        return new FishDTO(fish.getId(),fish.getName(),fish.getQty(),fish.getNormalPrice(),fish.getWholesaleprice());
     }
 
     @Override
@@ -35,9 +37,19 @@ public class FishBoImpl implements FishBo {
     }
 
     @Override
-    public List<Fish> getAll() throws SQLException, ClassNotFoundException {
-       List<Fish> fishList = fishDao.getAll();
-       return fishList;
+    public List<FishDTO> getAll() throws SQLException, ClassNotFoundException {
+      List<Fish> fishes = fishDao.getAll();
+      List<FishDTO> fishDTOs = new ArrayList<>();
+      for (Fish fish : fishes) {
+          fishDTOs.add(new FishDTO(
+                  fish.getId(),
+                  fish.getName(),
+                  fish.getQty(),
+                  fish.getNormalPrice(),
+                  fish.getWholesaleprice()
+          ));
+      }
+      return fishDTOs;
     }
 
     @Override
@@ -47,7 +59,7 @@ public class FishBoImpl implements FishBo {
 
     @Override
     public List<String> getIds() throws SQLException, ClassNotFoundException {
-        return null;
+        return fishDao.getIds();
     }
 
     @Override

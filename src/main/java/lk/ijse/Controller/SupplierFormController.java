@@ -12,9 +12,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.OrderBoImpl;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
+import lk.ijse.Entity.Supplier;
 import lk.ijse.dto.SupplierDTO;
 import lk.ijse.model.tm.SupplierTm;
-import lk.ijse.repository.SupplierRepo;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -77,6 +80,8 @@ public class SupplierFormController {
     @FXML
     private TextField txtSupName;
 
+    SupplierBOImpl supplierBO = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+
     public void initialize() throws IOException {
        setDate();
        setTime();
@@ -88,12 +93,14 @@ public class SupplierFormController {
 
     private void getCurrentOrderId() {
         try {
-            String currentId = SupplierRepo.getCurrentId();
+            String currentId = supplierBO.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             txtSupId.setText(nextOrderId);
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -116,7 +123,7 @@ public class SupplierFormController {
         ObservableList<SupplierTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<SupplierDTO> supplierList = SupplierRepo.getAll();
+            List<SupplierDTO> supplierList = supplierBO.getAll();
             for (SupplierDTO supplier : supplierList) {
                 SupplierTm tm = new SupplierTm(
                         supplier.getId(),
@@ -131,6 +138,8 @@ public class SupplierFormController {
 
             tblSupplier.setItems(obList);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -173,7 +182,7 @@ public class SupplierFormController {
         String id = txtSupId.getText();
 
         try {
-            boolean isDeleted = SupplierRepo.delete(id);
+            boolean isDeleted = supplierBO.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Supplier deleted!").show();
                 clearFields();
@@ -181,7 +190,7 @@ public class SupplierFormController {
                 loadAllCustomers();
                 getCurrentOrderId();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
@@ -209,7 +218,7 @@ public class SupplierFormController {
 
 
         try {
-            boolean isSaved = SupplierRepo.save(supplier);
+            boolean isSaved = supplierBO.save(supplier);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "supplier saved!!!.").show();
                 clearFields();
@@ -219,6 +228,8 @@ public class SupplierFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -254,7 +265,7 @@ public class SupplierFormController {
         SupplierDTO supplier = new SupplierDTO(id, name, contact, NIC, address );
 
         try {
-            boolean isUpdated = SupplierRepo.update(supplier);
+            boolean isUpdated = supplierBO.update(supplier);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Supplier updated!").show();
                 clearFields();
@@ -263,16 +274,18 @@ public class SupplierFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 
     }
 
     @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
+    void txtSearchOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = txtSupId.getText();
 
-        SupplierDTO supplier = SupplierRepo.searchById(id);
+        Supplier supplier = supplierBO.searchById(id);
         if (supplier != null) {
             txtSupId.setText(supplier.getId());
             txtSupName.setText(supplier.getName());

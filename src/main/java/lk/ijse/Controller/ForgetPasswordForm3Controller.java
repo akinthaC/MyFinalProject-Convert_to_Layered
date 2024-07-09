@@ -15,7 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import lk.ijse.repository.UserRepo;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.UserBoImpl;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -41,6 +42,8 @@ public class ForgetPasswordForm3Controller {
 
     @FXML
     private TextField txtPassword1;
+
+    UserBoImpl userBo = (UserBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
 
     public void initialize(){
         txtPassword1.setVisible(false);
@@ -69,7 +72,7 @@ public class ForgetPasswordForm3Controller {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) throws SQLException {
+    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String password = txtPassword.getText();
         String reEnterPassword = txtConformPassword.getText();
         String userName = ForgetPasswordForm1Controller.userName;
@@ -84,7 +87,7 @@ public class ForgetPasswordForm3Controller {
         }
 
         if (password.equalsIgnoreCase(reEnterPassword)){
-            boolean isUpdated= UserRepo.update(password,userName);
+            boolean isUpdated= userBo.update(password,userName);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Password Updated!!").show();
             }

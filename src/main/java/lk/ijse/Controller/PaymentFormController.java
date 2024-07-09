@@ -17,10 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.impl.CustomerBoImpl;
+import lk.ijse.BO.custom.impl.OrderBoImpl;
+import lk.ijse.BO.custom.impl.PaymentBoImpl;
 import lk.ijse.dto.PaymentDTO;
 import lk.ijse.model.tm.PaymentTm;
-import lk.ijse.repository.OrderRepo;
-import lk.ijse.repository.PaymentRepo;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -91,6 +93,8 @@ public class PaymentFormController {
 
     @FXML
     private TextField txtTotal;
+    PaymentBoImpl paymentBo = (PaymentBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PAYMENT);
+    OrderBoImpl orderBo = (OrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
 
 
     public void initialize() throws IOException {
@@ -109,7 +113,7 @@ public class PaymentFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
 
-        List<String> idList = PaymentRepo.getType();
+        List<String> idList = paymentBo.getType();
 
         for(String value : idList) {
             obList.add(value);
@@ -123,7 +127,7 @@ public class PaymentFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = OrderRepo.getIds();
+            List<String> idList = orderBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -133,17 +137,21 @@ public class PaymentFormController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void getCurrentOrderId() {
         try {
-            String currentId = PaymentRepo.getCurrentId();
+            String currentId = paymentBo.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             txtPaymentId.setText(nextOrderId);
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -166,7 +174,7 @@ public class PaymentFormController {
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<PaymentDTO> paymentList = PaymentRepo.getAll();
+            List<PaymentDTO> paymentList = paymentBo.getAll();
             for (PaymentDTO payment : paymentList) {
                 PaymentTm tm = new PaymentTm(
                       payment.getId(),
@@ -184,6 +192,8 @@ public class PaymentFormController {
 
             tblPayment.setItems(obList);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -242,7 +252,7 @@ public class PaymentFormController {
         String id = txtPaymentId.getText();
 
         try {
-            boolean isDeleted = PaymentRepo.delete(id);
+            boolean isDeleted = paymentBo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "payment information deleted!").show();
                 clearFields();
@@ -252,6 +262,8 @@ public class PaymentFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -288,7 +300,7 @@ public class PaymentFormController {
 
 
         try {
-            boolean isSaved = PaymentRepo.save(payment);
+            boolean isSaved = paymentBo.save(payment);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "payment Successfully !!!.").show();
                 clearFields();
@@ -298,6 +310,8 @@ public class PaymentFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 
@@ -334,7 +348,7 @@ public class PaymentFormController {
         PaymentDTO payment = new PaymentDTO(id, ordid, date, total, advance, type,AmountToPaid,Status);
 
         try {
-            boolean isUpdated = PaymentRepo.update(payment);
+            boolean isUpdated = paymentBo.update(payment);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "payment updated!").show();
                 clearFields();
@@ -343,8 +357,9 @@ public class PaymentFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-
 
 
     }
@@ -356,10 +371,10 @@ public class PaymentFormController {
     }
 
     @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
+    void txtSearchOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = txtPaymentId.getText();
 
-        PaymentDTO payment = PaymentRepo.searchById(id);
+        PaymentDTO payment = paymentBo.searchById(id);
         if (payment != null) {
             txtPaymentId.setText(payment.getId());
             cmpOrderId.setValue(payment.getOrdid());

@@ -14,13 +14,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.SupFishBo;
+import lk.ijse.BO.custom.impl.FishBoImpl;
+import lk.ijse.BO.custom.impl.SupAccBoImpl;
+import lk.ijse.BO.custom.impl.SupFishBoImpl;
+import lk.ijse.BO.custom.impl.SupplierBOImpl;
+import lk.ijse.Entity.Fish;
+import lk.ijse.Entity.Supplier;
 import lk.ijse.dto.FishDTO;
 import lk.ijse.dto.SupFishDTO;
 import lk.ijse.dto.SupplierDTO;
 import lk.ijse.model.tm.SupFishTm;
-import lk.ijse.repository.FishRepo;
-import lk.ijse.repository.SupFishRepo;
-import lk.ijse.repository.SupplierRepo;
 import lk.ijse.utill.Regex;
 
 import java.io.IOException;
@@ -78,6 +83,10 @@ public class AddNewQtyController {
     @FXML
     private TextField txtpurchasedAmount;
 
+    SupFishBoImpl supFishBo = (SupFishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
+    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+
     public void initialize() throws IOException, SQLException {
         setDate();
         setTime();
@@ -103,7 +112,7 @@ public class AddNewQtyController {
         try {
 
 
-            List<SupFishDTO> supFishList = SupFishRepo.getAll();
+            List<SupFishDTO> supFishList = supFishBo.getAll();
             for (SupFishDTO supFish : supFishList) {
 
                 SupFishTm tm1 = new SupFishTm(
@@ -117,7 +126,7 @@ public class AddNewQtyController {
 
             }
             tblAccSupFIsh.setItems(obList2);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -154,7 +163,7 @@ public class AddNewQtyController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = SupplierRepo.getIds();
+            List<String> idList = supplierBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -162,7 +171,7 @@ public class AddNewQtyController {
 
             cmbSup.setItems(obList);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -171,7 +180,7 @@ public class AddNewQtyController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = FishRepo.getIds();
+            List<String> idList = fishBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -180,7 +189,7 @@ public class AddNewQtyController {
             cmbFishId.setItems(obList);
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -216,9 +225,9 @@ public class AddNewQtyController {
         SupFishDTO supFish = new SupFishDTO(fishId, supId, date, qty,amount);
 
         try {
-            boolean isUpdate = FishRepo.updateSupFish(qty, fishId);
+            boolean isUpdate = fishBo.updateSupFish(qty, fishId);
             if (isUpdate) {
-                boolean isSaved = SupFishRepo.save(supFish);
+                boolean isSaved = supFishBo.save(supFish);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Qty Is Updated").show();
                     loadAllSupFIsh();
@@ -237,7 +246,7 @@ public class AddNewQtyController {
     void cmbFishIdOnAction(ActionEvent event) {
         String id = cmbFishId.getValue();
         try {
-            FishDTO fish= FishRepo.searchById(id);
+            FishDTO fish= fishBo.searchById(id);
 
             if (fish != null) {
 
@@ -245,7 +254,7 @@ public class AddNewQtyController {
 
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -255,11 +264,13 @@ public class AddNewQtyController {
     void cmbSupOnAction(ActionEvent event) {
         String id = cmbSup.getValue();
         try {
-            SupplierDTO supplier = SupplierRepo.searchById(id);
+            Supplier supplier = supplierBo.searchById(id);
 
             lblSup.setText(supplier.getName());
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
