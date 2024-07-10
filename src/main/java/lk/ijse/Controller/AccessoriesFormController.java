@@ -113,9 +113,9 @@ public class AccessoriesFormController {
 
     @FXML
     private TextField txtWholeSalePrice;
-    AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
-    SupAccBoImpl supAccBo = (SupAccBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
-    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    AccessoriesBo accessoriesBo = (AccessoriesBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
+    SupAccBo supAccBo = (SupAccBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
+    SupplierBo supplierBo = (SupplierBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
 
     public void initialize() throws IOException {
         setDate();
@@ -131,7 +131,7 @@ public class AccessoriesFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = accessoriesBo.getIds();
+            List<String> idList = supplierBo.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -177,14 +177,14 @@ public class AccessoriesFormController {
         try {
             List<AccessoriesDTO> accessoriesList = accessoriesBo.getAll();
             for (AccessoriesDTO accessories : accessoriesList) {
-                tblAccessories.getItems().add( new AccessoriesTm(
+                 AccessoriesTm tm= new AccessoriesTm(
                         accessories.getId(),
                         accessories.getName(),
                         accessories.getQty(),
                         accessories.getNormalPrice(),
                         accessories.getWholesaleprice()
-                ));
-
+                );
+                obList.add(tm);
 
             }
             List<SupAccDTO> supAcc = supAccBo.getAll();
@@ -339,6 +339,8 @@ public class AccessoriesFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+
+        System.out.println("aaa");
         String id=txtAccessorieId.getText();
         String name = txtAccessoriesName.getText();
         String qty = txtQtyOnHand.getText();
@@ -359,7 +361,9 @@ public class AccessoriesFormController {
 
         try {
             boolean isUpdated = accessoriesBo.update(accessories);
+            System.out.println("aaalllll");System.out.println("update = " + isUpdated);
             if(isUpdated) {
+                System.out.println("aaarrtgbfvgjk");
                 new Alert(Alert.AlertType.CONFIRMATION, "Accessories updated!").show();
                 clearFields();
                 setCellValueFactory();

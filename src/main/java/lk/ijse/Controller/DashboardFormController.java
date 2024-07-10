@@ -23,6 +23,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.DashboardBo;
+import lk.ijse.BO.custom.FishBo;
+import lk.ijse.BO.custom.OrderBo;
 import lk.ijse.BO.custom.impl.DashboardBoImpl;
 import lk.ijse.BO.custom.impl.FishBoImpl;
 import lk.ijse.BO.custom.impl.OrderBoImpl;
@@ -81,9 +84,9 @@ public class DashboardFormController {
     @FXML
     private PieChart pieChart;
 
-    OrderBoImpl orderBo = (OrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
-    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
-    DashboardBoImpl dashboardBo = (DashboardBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.DASHBOARD);
+    OrderBo orderBo = (OrderBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
+    FishBo fishBo = (FishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    DashboardBo dashboardBo = (DashboardBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.DASHBOARD);
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
         LineChart();

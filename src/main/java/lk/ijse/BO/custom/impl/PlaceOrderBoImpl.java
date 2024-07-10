@@ -27,7 +27,9 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
         try {
             boolean isOrderSaved = orderDao.save(new Order(pl.getOrder().getId(),pl.getOrder().getDate(), pl.getOrder().getHandOverDate(), pl.getOrder().getCusId()));
+            System.out.println("isOrederSave"+isOrderSaved);
             if (isOrderSaved) {
+                System.out.println("isOrederSave"+isOrderSaved);
                 boolean isQtyUpdated = false;
                 for (OrderDetailDTO od : pl.getOdlist()) {
                     if (od.getFishId() == null) {
@@ -35,26 +37,29 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
                         isQtyUpdated = accessoriesDao.updateQty(od.getAccId(),od.getQty());
 
                     } else {
+                        System.out.println("isOrederSave"+isOrderSaved);
                         isQtyUpdated = fishDao.updateQty1(od.getFishId(),od.getQty());
                     }
                 }
-
+                System.out.println("isQtyUpdated"+isQtyUpdated);
                 if (isQtyUpdated) {
                     boolean isSave=false;
                     for (OrderDetailDTO od : pl.getOdlist()){
                         if (od.getFishId() == null) {
 
-                            isSave = accessoriesOrderDao.save(new AccessoriesOrder(od.getOrdId(),od.getAccId(),od.getQty(),od.getStatus(),od.getDescription(),od.getDate()));
+                            isSave = accessoriesOrderDao.save(new AccessoriesOrder(od.getOrdId(),od.getAccId(),od.getQty(),od.getDescription(),od.getStatus(),od.getDate()));
 
                         } else {
-                            isSave = fishOrderDao.save(new FishOrder(od.getOrdId(),od.getFishId(),od.getQty(),od.getStatus(),od.getDescription(),od.getDate()));
+                            isSave = fishOrderDao.save1(od.getOrdId(),od.getFishId(),od.getQty(),od.getDescription(),od.getStatus(),od.getDate());
                         }
                     }
+                    System.out.println("isSave"+isSave);
                     if (isSave ) {
                         boolean isSave1 = false;
                         for (OrderDetailDTO od : pl.getOdlist()) {
-                            isSave1 = orderEmployeeDao.save(new OrderEmployee(od.getOrdId(),od.getEmpId()));
+                            isSave1 = orderEmployeeDao.save1(od.getOrdId(),od.getEmpId());
                         }
+                        System.out.println("isSave1"+isSave1);
                         if (isSave1) {
                             connection.commit();
                             return true;

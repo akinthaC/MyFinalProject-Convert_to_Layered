@@ -20,6 +20,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.FishBo;
+import lk.ijse.BO.custom.SupFishBo;
+import lk.ijse.BO.custom.SupplierBo;
 import lk.ijse.BO.custom.impl.FishBoImpl;
 import lk.ijse.BO.custom.impl.SupFishBoImpl;
 import lk.ijse.BO.custom.impl.SupplierBOImpl;
@@ -95,9 +98,9 @@ public class FishFormController {
     @FXML
     private TextField txtpurchasedAmount;
 
-    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
-    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
-    SupFishBoImpl supFishBo = (SupFishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
+    FishBo fishBo = (FishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    SupplierBo supplierBo = (SupplierBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    SupFishBo supFishBo = (SupFishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
 
 
     public void initialize() throws IOException, SQLException {

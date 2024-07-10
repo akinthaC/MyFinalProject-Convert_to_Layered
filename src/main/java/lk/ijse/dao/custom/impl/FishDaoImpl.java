@@ -24,7 +24,7 @@ public class FishDaoImpl implements FishDao {
 
     public  boolean update(Fish fish) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeSQL("UPDATE fish SET  name= ?, qtyOnHand = ?, normalPrice = ?, wholeSalePrice = ? WHERE FishId = ?",fish.getId(),fish.getQty(),fish.getNormalPrice(),fish.getWholesaleprice(),fish.getId());
+        return SQLUtil.executeSQL("UPDATE fish SET  name= ?, qtyOnHand = ?, normalPrice = ?, wholeSalePrice = ? WHERE FishId = ?",fish.getName(),fish.getQty(),fish.getNormalPrice(),fish.getWholesaleprice(),fish.getId());
     }
 
     public  Fish searchById(String id) throws SQLException, ClassNotFoundException {
@@ -104,7 +104,7 @@ public class FishDaoImpl implements FishDao {
 
     public boolean updateQty1(String fishId, int qty) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeSQL("UPDATE fish SET qtyOnHand = qtyOnHand - ? WHERE fishId = ?",fishId,qty);
+        return SQLUtil.executeSQL("UPDATE fish SET qtyOnHand = qtyOnHand - ? WHERE fishId = ?",qty,fishId);
     }
 
     public  boolean updateSupFish(int qty, String id) throws SQLException, ClassNotFoundException {

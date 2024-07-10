@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.SupplierBo;
 import lk.ijse.BO.custom.impl.OrderBoImpl;
 import lk.ijse.BO.custom.impl.SupplierBOImpl;
 import lk.ijse.Entity.Supplier;
@@ -80,7 +81,7 @@ public class SupplierFormController {
     @FXML
     private TextField txtSupName;
 
-    SupplierBOImpl supplierBO = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    SupplierBo supplierBO = (SupplierBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
 
     public void initialize() throws IOException {
        setDate();

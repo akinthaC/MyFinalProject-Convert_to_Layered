@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.CustomerBo;
 import lk.ijse.BO.custom.impl.CustomerBoImpl;
 import lk.ijse.dto.CustomerDTO;
 import lk.ijse.model.tm.CustomerTm;
@@ -94,7 +95,7 @@ public class CustomerFormController {
     @FXML
     private JFXComboBox<String> cmbType;
 
-    CustomerBoImpl customerBo = (CustomerBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.CUSTOMER);
+    CustomerBo customerBo = (CustomerBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.CUSTOMER);
     public void initialize() throws IOException {
         setDate();
         setTime();

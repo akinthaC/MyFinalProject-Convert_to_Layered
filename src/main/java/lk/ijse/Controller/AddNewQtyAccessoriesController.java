@@ -3,6 +3,9 @@ package lk.ijse.Controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.AccessoriesBo;
+import lk.ijse.BO.custom.SupAccBo;
+import lk.ijse.BO.custom.SupplierBo;
 import lk.ijse.BO.custom.impl.AccessoriesBoImpl;
 import lk.ijse.BO.custom.impl.SupAccBoImpl;
 import lk.ijse.BO.custom.impl.SupplierBOImpl;
@@ -83,9 +86,9 @@ public class AddNewQtyAccessoriesController {
     private TextField txtpurchasedAmount;
 
     public String SupId;
-    SupAccBoImpl supAccBo = (SupAccBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
-    AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
-    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    SupAccBo supAccBo = (SupAccBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
+    AccessoriesBo accessoriesBo = (AccessoriesBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
+    SupplierBo supplierBo = (SupplierBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
 
     public void initialize() throws IOException, SQLException {
         setDate();

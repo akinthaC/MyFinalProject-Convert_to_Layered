@@ -18,6 +18,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.OrderBo;
+import lk.ijse.BO.custom.PaymentBO;
 import lk.ijse.BO.custom.impl.CustomerBoImpl;
 import lk.ijse.BO.custom.impl.OrderBoImpl;
 import lk.ijse.BO.custom.impl.PaymentBoImpl;
@@ -93,8 +95,8 @@ public class PaymentFormController {
 
     @FXML
     private TextField txtTotal;
-    PaymentBoImpl paymentBo = (PaymentBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PAYMENT);
-    OrderBoImpl orderBo = (OrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
+    PaymentBO paymentBo = (PaymentBO) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PAYMENT);
+    OrderBo orderBo = (OrderBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
 
 
     public void initialize() throws IOException {

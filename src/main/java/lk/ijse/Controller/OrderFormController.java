@@ -3,6 +3,7 @@ package lk.ijse.Controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.*;
 import lk.ijse.BO.custom.impl.*;
 import lk.ijse.dto.*;
 import javafx.animation.Animation;
@@ -133,15 +134,15 @@ public class OrderFormController {
     private TextField txtQty;
 
     private ObservableList<cartTm> obList = FXCollections.observableArrayList();
-    AccessoriesBoImpl accessoriesBo = (AccessoriesBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
-    SupAccBoImpl supAccBo = (SupAccBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
-    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
-    SupFishBoImpl supFishBo = (SupFishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
-    OrderBoImpl orderBo = (OrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
-    PlaceOrderBoImpl placeOrderBo = (PlaceOrderBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PLACEORDER);
-    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
-    EmployeeBoImpl employeeBo = (EmployeeBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.EMPLOYEE);
-    CustomerBoImpl customerBo = (CustomerBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.CUSTOMER);
+    AccessoriesBo accessoriesBo = (AccessoriesBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
+    SupAccBo supAccBo = (SupAccBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPACC);
+    SupplierBo supplierBo = (SupplierBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    SupFishBo supFishBo = (SupFishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
+    OrderBo orderBo = (OrderBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
+    PlaceOrderBo placeOrderBo = (PlaceOrderBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PLACEORDER);
+    FishBo fishBo = (FishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    EmployeeBo employeeBo = (EmployeeBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.EMPLOYEE);
+    CustomerBo customerBo = (CustomerBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.CUSTOMER);
 
     public void initialize() {
         setDate();

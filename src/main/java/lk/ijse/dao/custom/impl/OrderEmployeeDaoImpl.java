@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class OrderEmployeeDaoImpl implements OrderEmployeeDao {
-    public  boolean save(String ordId, String empId) throws SQLException, ClassNotFoundException {
+    public  boolean save1(String ordId, String empId) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("INSERT INTO order_employee VALUES(?,?)",ordId,empId);
     }

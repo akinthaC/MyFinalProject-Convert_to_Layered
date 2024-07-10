@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.UserBo;
 import lk.ijse.BO.custom.impl.SupplierBOImpl;
 import lk.ijse.BO.custom.impl.UserBoImpl;
 import lk.ijse.utill.Regex;
@@ -51,7 +52,7 @@ public class ChangeEmailController {
     @FXML
     private TextField txtEmail;
 
-    UserBoImpl userBo = (UserBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
+    UserBo userBo = (UserBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
 
     public void initialize(){
         lblUserName.setText(NewLoginFormController.userName1);

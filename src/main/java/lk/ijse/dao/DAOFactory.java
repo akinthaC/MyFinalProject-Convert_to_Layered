@@ -21,7 +21,7 @@ public class DAOFactory {
             case ACCESSORIES:
                 return new AccessoriesDaoImpl();
             case ACCESSORIESORDER:
-                return new AccessoriesDaoImpl();
+                return new AccessoriesOrderDaoImpl()  ;
             case CUSTOMER:
                 return new CustomerDaoImpl();
             case DASHBOARD:

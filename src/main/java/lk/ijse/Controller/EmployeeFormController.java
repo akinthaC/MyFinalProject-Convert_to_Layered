@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.EmployeeBo;
 import lk.ijse.BO.custom.impl.EmployeeBoImpl;
 import lk.ijse.BO.custom.impl.FishBoImpl;
 import lk.ijse.dto.EmployeeDTO;
@@ -78,7 +79,7 @@ public class EmployeeFormController {
     @FXML
     private TextField txtEmpName;
 
-    EmployeeBoImpl employeeBo = (EmployeeBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.EMPLOYEE);
+    EmployeeBo employeeBo = (EmployeeBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.EMPLOYEE);
 
     public void initialize() throws IOException {
         setDate();
@@ -260,7 +261,7 @@ public class EmployeeFormController {
         String id = txtEmpId.getText();
 
         EmployeeDTO employee = employeeBo.searchById(id);
-        if (employee != null) {
+        if (id != null) {
             txtEmpId.setText(employee.getId());
             txtEmpName.setText(employee.getName());
             txtEmpContact.setText(employee.getContact());

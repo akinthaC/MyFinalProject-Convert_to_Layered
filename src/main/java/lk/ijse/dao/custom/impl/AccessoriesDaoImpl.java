@@ -19,7 +19,7 @@ public class AccessoriesDaoImpl implements AccessoriesDao {
 
     public  boolean update(Accessories accessories) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeSQL("UPDATE accessories SET name= ?, qtyOnHand = ?, normalPrice = ?, wholeSalePrice = ? WHERE accId = ?",accessories.getId(),accessories.getName(),accessories.getQty(),accessories.getNormalPrice(),accessories.getWholesaleprice());
+        return SQLUtil.executeSQL("UPDATE accessories SET name= ?, qtyOnHand = ?, normalPrice = ?, wholeSalePrice = ? WHERE accId = ?",accessories.getName(),accessories.getQty(),accessories.getNormalPrice(),accessories.getWholesaleprice(),accessories.getId());
     }
 
 

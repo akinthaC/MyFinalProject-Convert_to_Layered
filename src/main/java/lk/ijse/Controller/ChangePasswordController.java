@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.UserBo;
 import lk.ijse.BO.custom.impl.UserBoImpl;
 import lk.ijse.utill.Regex;
 
@@ -53,7 +54,7 @@ public class ChangePasswordController {
     @FXML
     private TextField txtPassword1;
 
-    UserBoImpl userBo = (UserBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
+    UserBo userBo = (UserBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.USER);
     public void initialize(){
         txtPassword1.setVisible(false);
         txtConformPassword1.setVisible(false);

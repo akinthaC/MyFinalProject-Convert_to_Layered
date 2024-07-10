@@ -16,7 +16,6 @@ public interface AccessoriesBo extends SuperBo {
     public  boolean update(AccessoriesDTO accessories) throws SQLException, ClassNotFoundException ;
 
 
-
     public  boolean delete(String id) throws SQLException, ClassNotFoundException ;
 
     public List<AccessoriesDTO> getAll() throws SQLException, ClassNotFoundException ;

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class FishOrderDaoImpl implements FishOrderDao {
-    public  boolean save(String ordId, String fishId, String status, int qty, String description, Date date) throws SQLException, ClassNotFoundException {
+    public  boolean save1(String ordId, String fishId, int qty, String description, String status, Date date) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("INSERT INTO fish_order VALUES(?,?,?,?,?,?)",ordId,fishId,qty,description,status,date);
 

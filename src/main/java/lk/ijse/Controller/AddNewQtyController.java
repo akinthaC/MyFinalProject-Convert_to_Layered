@@ -15,7 +15,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.FishBo;
 import lk.ijse.BO.custom.SupFishBo;
+import lk.ijse.BO.custom.SupplierBo;
 import lk.ijse.BO.custom.impl.FishBoImpl;
 import lk.ijse.BO.custom.impl.SupAccBoImpl;
 import lk.ijse.BO.custom.impl.SupFishBoImpl;
@@ -83,9 +85,9 @@ public class AddNewQtyController {
     @FXML
     private TextField txtpurchasedAmount;
 
-    SupFishBoImpl supFishBo = (SupFishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
-    SupplierBOImpl supplierBo = (SupplierBOImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
-    FishBoImpl fishBo = (FishBoImpl) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
+    SupFishBo supFishBo = (SupFishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPFISH);
+    SupplierBo supplierBo = (SupplierBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.SUPPLIER);
+    FishBo fishBo = (FishBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.FISH);
 
     public void initialize() throws IOException, SQLException {
         setDate();
