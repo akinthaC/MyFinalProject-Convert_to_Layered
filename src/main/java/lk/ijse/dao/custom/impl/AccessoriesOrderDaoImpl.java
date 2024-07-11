@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AccessoriesOrderDaoImpl implements AccessoriesOrderDao {
-    public  boolean save(String ordId, String accId, String status, int qty, String description, Date date) throws SQLException, ClassNotFoundException {
+    public  boolean save1(String ordId, String accId, int qty, String description,String status, Date date) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeSQL("INSERT INTO accessories_order VALUES(?,?,?,?,?,?)",ordId,accId,qty,description,status,date);
     }

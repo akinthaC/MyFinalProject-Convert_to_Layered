@@ -47,7 +47,7 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
                     for (OrderDetailDTO od : pl.getOdlist()){
                         if (od.getFishId() == null) {
 
-                            isSave = accessoriesOrderDao.save(new AccessoriesOrder(od.getOrdId(),od.getAccId(),od.getQty(),od.getDescription(),od.getStatus(),od.getDate()));
+                            isSave = accessoriesOrderDao.save1(od.getOrdId(),od.getAccId(),od.getQty(),od.getDescription(),od.getStatus(),od.getDate());
 
                         } else {
                             isSave = fishOrderDao.save1(od.getOrdId(),od.getFishId(),od.getQty(),od.getDescription(),od.getStatus(),od.getDate());

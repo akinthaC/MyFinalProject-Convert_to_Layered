@@ -111,7 +111,7 @@ WHERE ao.orderId = $P{OrderId};]]>
 			<staticText>
 				<reportElement x="173" y="56" width="218" height="20" uuid="5c04a676-0e64-4de3-b1e6-92aab1c75739"/>
 				<textElement textAlignment="Center">
-					<font fontName="Courier 10 Pitch" size="10"/>
+					<font fontName="Microsoft Tai Le" size="10"/>
 				</textElement>
 				<text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
 			</staticText>
@@ -135,14 +135,14 @@ WHERE ao.orderId = $P{OrderId};]]>
 			<staticText>
 				<reportElement x="431" y="0" width="55" height="20" uuid="44875463-5b2d-4aab-8f49-3dbd67403f34"/>
 				<textElement>
-					<font fontName="C059" isBold="true"/>
+					<font fontName="Microsoft Tai Le" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Date:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="431" y="20" width="55" height="20" uuid="d6232762-0382-449f-abc2-bd8441dc506b"/>
 				<textElement>
-					<font fontName="C059" isBold="true"/>
+					<font fontName="Microsoft Tai Le" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Time:]]></text>
 			</staticText>
@@ -156,7 +156,7 @@ WHERE ao.orderId = $P{OrderId};]]>
 			</textField>
 			<image>
 				<reportElement x="122" y="0" width="44" height="70" uuid="5563d2d3-f064-441a-9ff1-96e02f6d5e95"/>
-				<imageExpression><![CDATA["/home/akintha/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/akint/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -289,11 +289,11 @@ WHERE ao.orderId = $P{OrderId};]]>
 			</textField>
 			<image>
 				<reportElement x="136" y="0" width="50" height="50" uuid="56f26ac7-f072-45ea-86b7-751bdc987749"/>
-				<imageExpression><![CDATA["/home/akintha/Downloads/lovely-gracious-gold-fish-isolated-close-up-ultra-hd-astonishing-arts.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/akint/Downloads/lovely-gracious-gold-fish-isolated-close-up-ultra-hd-astonishing-arts.jpg"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="370" y="-9" width="50" height="50" uuid="796e4534-3aca-4275-b62b-1daafa280d01"/>
-				<imageExpression><![CDATA["/home/akintha/Downloads/360_F_553920491_OtvBv2oB9lgHNRIXrrp122dsaJE5DWym.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/akint/Downloads/360_F_553920491_OtvBv2oB9lgHNRIXrrp122dsaJE5DWym.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="201" y="-10" width="161" height="70" uuid="8aba2412-28fc-4282-9ddc-ae89c700599f"/>

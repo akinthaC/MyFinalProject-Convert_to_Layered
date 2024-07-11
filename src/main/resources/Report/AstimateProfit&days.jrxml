@@ -70,7 +70,7 @@ WHERE
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="beb3f510-79d0-4b27-9fe7-dbe03fdc102e"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
@@ -91,7 +91,7 @@ WHERE
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="ae43c669-c89b-4bc3-b137-429be3bf0dca"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
@@ -112,20 +112,20 @@ WHERE
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="9d66138c-a07b-43a3-8566-eed62e3e16d8"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
             <staticText>
                 <reportElement x="-10" y="118" width="249" height="20" uuid="10712089-943b-49fd-b3a9-a5168e0c0d31"/>
                 <textElement textAlignment="Left">
-                    <font fontName="Gayathri Thin" size="14" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" size="14" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Total Astimate profit last7Days;]]></text>
             </staticText>
             <image>
                 <reportElement x="122" y="0" width="44" height="70" uuid="84e1d0b0-bbc0-4318-ab99-02ab659564d2"/>
-                <imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+                <imageExpression><![CDATA["C:/Users/akint/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
             </image>
             <line>
                 <reportElement x="-10" y="133" width="200" height="1" uuid="fc4d0f7d-3740-406d-858a-01087d136bbb"/>
@@ -133,14 +133,14 @@ WHERE
             <staticText>
                 <reportElement x="430" y="10" width="55" height="20" uuid="29a24377-4540-4ed0-a4f1-ad7b0dd9dc1b"/>
                 <textElement>
-                    <font fontName="C059" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Date:]]></text>
             </staticText>
             <staticText>
                 <reportElement x="430" y="30" width="55" height="20" uuid="33679f6b-26e3-4016-8245-ded7f7f1fc3a"/>
                 <textElement>
-                    <font fontName="C059" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Time:]]></text>
             </staticText>

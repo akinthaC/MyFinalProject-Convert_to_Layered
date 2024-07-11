@@ -100,7 +100,7 @@ public class AccessoriesDaoImpl implements AccessoriesDao {
 
 
     public boolean updateQty(String accId, int qty) throws SQLException, ClassNotFoundException {
-        return SQLUtil.executeSQL("UPDATE accessories SET qtyOnHand = qtyOnHand - ? WHERE accId = ?",accId,qty);
+        return SQLUtil.executeSQL("UPDATE accessories SET qtyOnHand = qtyOnHand - ? WHERE accId = ?",qty,accId);
     }
 
 

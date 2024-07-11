@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.PayFormController">
+   <children>
+      <AnchorPane prefHeight="48.0" prefWidth="602.0" style="-fx-background-color: #1e272e;">
+         <children>
+            <Label layoutX="243.0" layoutY="6.0" text="Payment " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTime" layoutX="501.0" layoutY="28.0" text="4.50" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDate" layoutX="500.0" layoutY="9.0" text="2024/04/07" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtDate" layoutX="456.0" layoutY="9.0" prefHeight="18.0" prefWidth="46.0" text="Date:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="456.0" layoutY="25.0" prefHeight="18.0" prefWidth="46.0" text="Time:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="39.0" layoutY="83.0" text="Order ID:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="LblOrd" layoutX="51.0" layoutY="111.0" prefHeight="20.0" prefWidth="72.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="144.0" layoutY="83.0" text="Total Amount:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="LblTotal" layoutX="178.0" layoutY="111.0" prefHeight="20.0" prefWidth="86.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="283.0" layoutY="83.0" text="Date:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="LblDate" layoutX="280.0" layoutY="111.0" prefHeight="20.0" prefWidth="86.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="399.0" layoutY="83.0" text="Pay Id:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPayId" layoutX="399.0" layoutY="108.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="281.0" layoutY="186.0" text="Pay Amount:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TxtAdvance" layoutX="281.0" layoutY="213.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="47.0" layoutY="185.0" prefHeight="22.0" prefWidth="61.0" text="Type:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="392.0" layoutY="306.0" onAction="#btnSaveOnAction" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: #27ae60;" text="Save">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="24.0">
+               <image>
+                  <Image url="@../image/icons8-save-32.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXComboBox fx:id="cmbType" layoutX="51.0" layoutY="209.0" onAction="#cmbTypeOnAction" prefHeight="24.0" prefWidth="147.0" />
+      <Line endX="-71.00006103515625" endY="-8.999992370605469" layoutX="671.0" layoutY="57.0" startX="-671.0" startY="-8.999992370605469" stroke="#d71111" strokeWidth="1.75" />
+   </children>
+</AnchorPane>

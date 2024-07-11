@@ -77,12 +77,12 @@ FROM
 			</staticText>
 			<image>
 				<reportElement x="122" y="0" width="44" height="70" uuid="1fe444f9-7f0b-4e2d-a1c1-3e2e910621c0"/>
-				<imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/akint/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="173" y="56" width="218" height="20" uuid="6d59000d-7ecb-4864-8368-d48d137c650d"/>
 				<textElement textAlignment="Center">
-					<font fontName="Courier 10 Pitch" size="10"/>
+					<font fontName="Microsoft Tai Le" size="10"/>
 				</textElement>
 				<text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
 			</staticText>
@@ -96,14 +96,14 @@ FROM
 			<staticText>
 				<reportElement x="430" y="10" width="55" height="20" uuid="11f55246-d3cc-47b4-8df8-450b64fea2ee"/>
 				<textElement>
-					<font fontName="C059" isBold="true"/>
+					<font fontName="Microsoft Tai Le" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Date:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="430" y="30" width="55" height="20" uuid="326a0a1f-5d31-4b48-9a23-ec0fadf9a8c4"/>
 				<textElement>
-					<font fontName="C059" isBold="true"/>
+					<font fontName="Microsoft Tai Le" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Time:]]></text>
 			</staticText>

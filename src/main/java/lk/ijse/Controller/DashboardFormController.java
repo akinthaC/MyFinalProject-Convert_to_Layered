@@ -32,6 +32,8 @@ import lk.ijse.BO.custom.impl.OrderBoImpl;
 import lk.ijse.BO.custom.impl.UserBoImpl;
 import lk.ijse.Db.DbConnection;
 import javafx.scene.chart.LineChart;
+import lk.ijse.dao.custom.OrderDao;
+import lk.ijse.dao.custom.impl.OrderDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -116,6 +118,7 @@ public class DashboardFormController {
     }
 
     private void LineChart() throws SQLException, ClassNotFoundException {
+        OrderDao orderDao = new OrderDaoImpl();
         XYChart.Series series = new XYChart.Series();
 
         Map<String, Integer> stocksByDay = orderBo.getOrderCountByDay();

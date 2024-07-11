@@ -47,17 +47,17 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="8.0" layoutY="94.0" text="(Click Here to Get Last 7Days Profit)" />
+            <Label layoutX="28.0" layoutY="94.0" text="(Click Here to Get Last 7Days Profit)" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="345.0" layoutY="129.0" prefHeight="135.0" prefWidth="190.0" style="-fx-background-color: #bdc3c7;">
+      <AnchorPane layoutX="357.0" layoutY="129.0" prefHeight="135.0" prefWidth="241.0" style="-fx-background-color: #bdc3c7;">
          <children>
-            <JFXButton fx:id="btnAstimate" buttonType="RAISED" layoutX="59.0" layoutY="14.0" onAction="#btnAstimateONAction" prefHeight="60.0" prefWidth="147.0" style="-fx-background-color: #3498db;" text="Astimate profit">
+            <JFXButton fx:id="btnAstimate" buttonType="RAISED" layoutX="51.0" layoutY="14.0" onAction="#btnAstimateONAction" prefHeight="60.0" prefWidth="147.0" style="-fx-background-color: #3498db;" text="Astimate profit">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutY="91.0" text="(Click Here to Get Astimate Profit 7days)" />
+            <Label layoutX="14.0" layoutY="91.0" text="(Click Here to Get Astimate Profit 7days)" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="640.0" layoutY="129.0" prefHeight="135.0" prefWidth="265.0" style="-fx-background-color: #bdc3c7;">
@@ -67,7 +67,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="29.0" layoutY="90.0" text="(Click Here to Get last year profit)" />
+            <Label layoutX="47.0" layoutY="90.0" text="(Click Here to Get last year profit)" />
          </children>
       </AnchorPane>
       <Label layoutX="35.0" layoutY="441.0" prefHeight="16.0" prefWidth="100.0" text="Details:">
@@ -82,7 +82,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="8.0" layoutY="94.0" prefHeight="16.0" prefWidth="257.0" text="(Click Here to Get pendingPay details)" />
+            <Label layoutX="21.0" layoutY="94.0" prefHeight="18.0" prefWidth="235.0" text="(Click Here to Get pendingPay details)" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="345.0" layoutY="488.0" prefHeight="135.0" prefWidth="265.0" style="-fx-background-color: #bdc3c7;">
@@ -92,7 +92,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="13.0" layoutY="93.0" text="(Click Here to Get Employee Details)" />
+            <Label layoutX="33.0" layoutY="93.0" text="(Click Here to Get Employee Details)" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="640.0" layoutY="488.0" prefHeight="135.0" prefWidth="265.0" style="-fx-background-color: #bdc3c7;">
@@ -102,7 +102,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="27.0" layoutY="96.0" text="(Click Here to Get Order Details)" />
+            <Label layoutX="50.0" layoutY="96.0" text="(Click Here to Get Order Details)" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="46.0" layoutY="290.0" prefHeight="135.0" prefWidth="265.0" style="-fx-background-color: #bdc3c7;">
@@ -112,7 +112,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="26.0" layoutY="94.0" text="(Click Here to Get Today Profit)" />
+            <Label layoutX="42.0" layoutY="94.0" text="(Click Here to Get Today Profit)" />
          </children>
       </AnchorPane>
    </children>

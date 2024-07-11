@@ -70,7 +70,7 @@
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="20489541-159a-4117-9f10-7a3c0ef9b37b"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
@@ -91,7 +91,7 @@
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="59cc3d64-91dc-402b-ba42-982803d4e349"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
@@ -112,32 +112,32 @@
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="90e54873-1972-4647-8da1-c61c80054fd6"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
             <image>
                 <reportElement x="122" y="0" width="44" height="70" uuid="728ec8a0-ed7d-40eb-aa1d-0aca12af9c8f"/>
-                <imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+                <imageExpression><![CDATA["C:/Users/akint/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
             </image>
             <staticText>
                 <reportElement x="-10" y="118" width="249" height="20" uuid="1019238d-20fa-4d74-93cd-02e0e4ac3c2f"/>
                 <textElement textAlignment="Left">
-                    <font fontName="Gayathri Thin" size="14" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" size="14" isBold="true"/>
                 </textElement>
                 <text><![CDATA[pending PaymentDetail;]]></text>
             </staticText>
             <staticText>
                 <reportElement x="430" y="10" width="55" height="20" uuid="2e0feb9c-55ff-46b8-84b4-bf837f80e734"/>
                 <textElement>
-                    <font fontName="C059" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Date:]]></text>
             </staticText>
             <staticText>
                 <reportElement x="430" y="30" width="55" height="20" uuid="3b5fb6cc-dcf4-4e26-b858-559b8858d0c8"/>
                 <textElement>
-                    <font fontName="C059" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Time:]]></text>
             </staticText>

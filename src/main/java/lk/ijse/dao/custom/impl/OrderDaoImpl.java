@@ -91,6 +91,6 @@ public class OrderDaoImpl implements OrderDao {
 
             return OrderCOuntByDay;
         }
-        return null;
+        return OrderCOuntByDay;
     }
 }

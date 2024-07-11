@@ -47,7 +47,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblPFish" layoutX="23.0" layoutY="75.0" prefHeight="35.0" prefWidth="163.0" text="Gold fish" textFill="#ebed00">
+            <Label fx:id="lblPFish" layoutX="27.0" layoutY="75.0" prefHeight="35.0" prefWidth="163.0" text="Gold fish" textFill="#ebed00">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>

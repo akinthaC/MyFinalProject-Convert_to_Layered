@@ -2,9 +2,18 @@ package lk.ijse.Controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import lk.ijse.BO.BOFactory;
 import lk.ijse.BO.custom.*;
 import lk.ijse.BO.custom.impl.*;
+import lk.ijse.Entity.Accessories;
+import lk.ijse.Entity.Fish;
+import lk.ijse.dao.custom.AccessoriesDao;
+import lk.ijse.dao.custom.FishDao;
+import lk.ijse.dao.custom.impl.AccessoriesDaoImpl;
+import lk.ijse.dao.custom.impl.FishDaoImpl;
 import lk.ijse.dto.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -132,6 +141,9 @@ public class OrderFormController {
 
     @FXML
     private TextField txtQty;
+    public static String orderId1;
+    public static double total11;
+
 
     private ObservableList<cartTm> obList = FXCollections.observableArrayList();
     AccessoriesBo accessoriesBo = (AccessoriesBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ACCESSORIES);
@@ -353,6 +365,7 @@ public class OrderFormController {
 
         double total = qty * price;
 
+
         JFXButton btnRemove = new JFXButton("remove");
         btnRemove.setCursor(Cursor.HAND);
         btnRemove.setStyle("-fx-background-color: #e32323; -fx-text-fill: white; " +
@@ -412,6 +425,7 @@ public class OrderFormController {
             netTotal += (double) colTotal.getCellData(i);
         }
         lblNetTotal.setText(String.valueOf(netTotal));
+        total11=netTotal;
     }
 
     @FXML
@@ -465,6 +479,7 @@ public class OrderFormController {
                     date
 
             );
+            orderId1=orderId;
 
             odList.add(od);
             System.out.println("od = " + od);
@@ -476,8 +491,10 @@ public class OrderFormController {
             if (isPlaced) {
                  new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
                 if (lblType.getText().equals("normal")) {
+                    addpayment();
                     btnPrintBill();
                 }else {
+                    addpayment();
                     btnPrintBillWholeSale();
 
                 }
@@ -503,6 +520,17 @@ public class OrderFormController {
 
 
     }
+    public void addpayment() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Pay_form.fxml"));
+        Parent rootNode = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(rootNode));
+        stage.centerOnScreen();
+        stage.setTitle("AddPayment Form");
+
+        stage.show();
+    }
 
     private boolean checkEquals(String id, char s1) {
         for (int i = 0; i < id.length(); i++) {
@@ -523,8 +551,9 @@ public class OrderFormController {
     @FXML
     void cmbAccessorieIdOnAction(ActionEvent event) {
         String id = cmbAccessorieId.getValue();
+        AccessoriesDao accessoriesDao=new AccessoriesDaoImpl();
         try {
-           AccessoriesDTO accessories = accessoriesBo.searchById(id);
+           Accessories accessories = accessoriesDao.searchById(id);
 
             if (accessories != null) {
 
@@ -579,8 +608,9 @@ public class OrderFormController {
     @FXML
     void cmbFishIdOnAction(ActionEvent event) {
         String id = cmbFishId.getValue();
+        FishDao fishDao = new FishDaoImpl();
         try {
-            FishDTO fish= fishBo.searchById(id);
+            Fish fish= fishDao.searchById(id);
 
             if (fish != null) {
 

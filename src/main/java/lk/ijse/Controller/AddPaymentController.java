@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import lk.ijse.BO.BOFactory;
+import lk.ijse.BO.custom.OrderBo;
 import lk.ijse.BO.custom.PaymentBO;
 import lk.ijse.BO.custom.impl.PaymentBoImpl;
 import lk.ijse.BO.custom.impl.SupplierBOImpl;
@@ -79,6 +80,7 @@ public class AddPaymentController {
     @FXML
     private TextField txtAmount;
     PaymentBO paymentBo = (PaymentBO) BOFactory.getBoFactory().GetBo(BOFactory.BOType.PAYMENT);
+    OrderBo orderBo = (OrderBo) BOFactory.getBoFactory().GetBo(BOFactory.BOType.ORDER);
     public void initialize() throws IOException {
         setDate();
         setTime();

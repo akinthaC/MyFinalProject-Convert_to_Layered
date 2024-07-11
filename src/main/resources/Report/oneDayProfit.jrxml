@@ -68,7 +68,7 @@ FROM
         <band height="79" splitType="Stretch">
             <image>
                 <reportElement x="122" y="0" width="44" height="70" uuid="53d1fdf0-a4c8-494f-b938-ed0fef7c8715"/>
-                <imageExpression><![CDATA["/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
+                <imageExpression><![CDATA["C:/Users/akint/Downloads/950760edb35388b32070f02f4c8a452f.jpg"]]></imageExpression>
             </image>
             <staticText>
                 <reportElement x="167" y="0" width="220" height="40" uuid="58758139-3c29-468e-8f4c-eacd8e73d078"/>
@@ -87,21 +87,21 @@ FROM
             <staticText>
                 <reportElement x="173" y="56" width="218" height="20" uuid="06f3f936-45e4-436b-887c-02e3503d9472"/>
                 <textElement textAlignment="Center">
-                    <font fontName="Courier 10 Pitch" size="10"/>
+                    <font fontName="Microsoft Tai Le" size="10"/>
                 </textElement>
                 <text><![CDATA[Tel :- 0772558964 , 0719771548]]></text>
             </staticText>
             <staticText>
                 <reportElement x="430" y="10" width="55" height="20" uuid="461d2cc6-3e85-42b2-9dfb-b1a548eb9467"/>
                 <textElement>
-                    <font fontName="C059" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Date:]]></text>
             </staticText>
             <staticText>
                 <reportElement x="430" y="30" width="55" height="20" uuid="aa112884-76a0-4570-8be8-ad958b6336fa"/>
                 <textElement>
-                    <font fontName="C059" isBold="true"/>
+                    <font fontName="Microsoft Tai Le" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Time:]]></text>
             </staticText>
